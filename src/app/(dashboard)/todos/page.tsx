@@ -41,7 +41,7 @@ export default async function TodosPage() {
     <div className="flex flex-col gap-6 h-full">
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
-          <h1 className="font-calistoga text-3xl font-bold tracking-tight">Задачи</h1>
+          <h1 className="font-sans font-bold tracking-tight text-3xl font-bold tracking-tight">Задачи</h1>
           <p className="text-muted-foreground mt-1">Организуйте свою работу и следите за прогрессом.</p>
         </div>
         <div className="flex gap-2">

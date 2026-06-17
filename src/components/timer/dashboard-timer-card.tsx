@@ -21,7 +21,7 @@ export function DashboardTimerCard() {
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <div className="relative flex items-center justify-center w-32 h-32 rounded-full border-4 border-muted mb-6 group">
-        <span className="font-calistoga text-4xl text-foreground tabular-nums drop-shadow-md">
+        <span className="font-sans font-bold tracking-tight text-4xl text-foreground tabular-nums drop-shadow-md">
           {minutes}:{seconds.toString().padStart(2, '0')}
         </span>
         <svg className="absolute top-0 left-0 w-full h-full transform -rotate-90">

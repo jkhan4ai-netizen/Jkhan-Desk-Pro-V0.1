@@ -60,12 +60,12 @@ export function FinanceChart({ data }: FinanceChartProps) {
             >
               <defs>
                 <linearGradient id="colorIncome" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#10b981" stopOpacity={0.3}/>
-                  <stop offset="95%" stopColor="#10b981" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.4}/>
+                  <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0}/>
                 </linearGradient>
                 <linearGradient id="colorExpense" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#ef4444" stopOpacity={0.3}/>
-                  <stop offset="95%" stopColor="#ef4444" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="hsl(var(--destructive))" stopOpacity={0.2}/>
+                  <stop offset="95%" stopColor="hsl(var(--destructive))" stopOpacity={0}/>
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border)" opacity={0.4} />
@@ -88,21 +88,22 @@ export function FinanceChart({ data }: FinanceChartProps) {
                 type="monotone" 
                 dataKey="income" 
                 name="income"
-                stroke="#10b981" 
-                strokeWidth={2}
+                stroke="hsl(var(--primary))" 
+                strokeWidth={3}
                 fillOpacity={1} 
                 fill="url(#colorIncome)" 
-                activeDot={{ r: 4, strokeWidth: 0, fill: "#10b981" }}
+                activeDot={{ r: 5, strokeWidth: 0, fill: "hsl(var(--primary))", style: { filter: "drop-shadow(0px 0px 8px rgba(37,99,235,0.8))" } }}
+                style={{ filter: "drop-shadow(0px 4px 8px rgba(37,99,235,0.2))" }}
               />
               <Area 
                 type="monotone" 
                 dataKey="expense" 
                 name="expense"
-                stroke="#ef4444" 
+                stroke="hsl(var(--destructive))" 
                 strokeWidth={2}
                 fillOpacity={1} 
                 fill="url(#colorExpense)" 
-                activeDot={{ r: 4, strokeWidth: 0, fill: "#ef4444" }}
+                activeDot={{ r: 4, strokeWidth: 0, fill: "hsl(var(--destructive))" }}
               />
             </AreaChart>
           </ResponsiveContainer>

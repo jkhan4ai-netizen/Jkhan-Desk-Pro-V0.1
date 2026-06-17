@@ -170,7 +170,7 @@ export function PomodoroTimer() {
         )}
 
         {/* Timer Display */}
-        <div className={`font-calistoga text-8xl md:text-[140px] leading-none mb-12 tracking-tight ${textClass} tabular-nums drop-shadow-lg`}>
+        <div className={`font-sans font-bold tracking-tight text-8xl md:text-[140px] leading-none mb-12 tracking-tight ${textClass} tabular-nums drop-shadow-lg`}>
           {formatTime(timeLeft)}
         </div>
 

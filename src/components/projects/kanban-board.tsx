@@ -17,11 +17,16 @@ const COLUMNS = [
 export function KanbanBoard({ initialProjects }: { initialProjects: any[] }) {
   // Local optimistic state for instant UI updates
   const [projects, setProjects] = useState(initialProjects)
+  const [isMounted, setIsMounted] = useState(false)
 
   // Update local state if props change (e.g., from server revalidation)
   useEffect(() => {
     setProjects(initialProjects)
   }, [initialProjects])
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   // Configure sensors for drag detection
   const sensors = useSensors(
@@ -65,6 +70,8 @@ export function KanbanBoard({ initialProjects }: { initialProjects: any[] }) {
       setProjects(initialProjects);
     }
   }
+
+  if (!isMounted) return null;
 
   return (
     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>

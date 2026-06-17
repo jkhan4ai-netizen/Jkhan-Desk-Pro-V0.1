@@ -11,25 +11,25 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0); /* slate-900 */
+  --primary: oklch(0.5 0.15 250); /* #2563eb */
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.627 0.194 149.214); /* 22C55E - green-500 */
+  --accent: oklch(0.5 0.15 250); /* #2563eb */
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.87 0 0);
-  --radius: 0.5rem;
+  --ring: oklch(0.5 0.15 250);
+  --radius: 1rem;
 
   /* Custom Glass UI Tokens */
-  --color-glass: rgba(255, 255, 255, 0.65);
-  --color-glass-hover: rgba(255, 255, 255, 0.8);
-  --color-glass-border: rgba(0, 0, 0, 0.06);
+  --color-glass: rgba(255, 255, 255, 0.75);
+  --color-glass-hover: rgba(255, 255, 255, 0.9);
+  --color-glass-border: rgba(37, 99, 235, 0.1);
 
   /* Sidebar */
   --sidebar-width: 16rem;
@@ -47,30 +47,30 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0); /* 020617 - slate-950 */
+  --background: oklch(0.13 0.028 261); /* Deep navy */
   --foreground: oklch(0.985 0 0); /* F8FAFC - slate-50 */
-  --card: oklch(0.145 0 0);
+  --card: oklch(0.18 0.02 261); /* Slightly lighter navy for cards */
   --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.145 0 0);
+  --popover: oklch(0.18 0.02 261);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0); /* white */
-  --primary-foreground: oklch(0.205 0 0);
+  --primary: oklch(0.6 0.15 250); /* #3b82f6 Neon Blue */
+  --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.269 0 0); /* 1E293B - slate-800 */
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.627 0.194 149.214); /* 22C55E - green-500 */
+  --accent: oklch(0.6 0.15 250); /* #3b82f6 Neon Blue */
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.985 0 0);
   --border: oklch(0.269 0 0);
   --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
+  --ring: oklch(0.6 0.15 250);
 
   /* Custom Glass UI Tokens - Dark */
-  --color-glass: rgba(15, 23, 42, 0.4);
-  --color-glass-hover: rgba(30, 41, 59, 0.6);
-  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --color-glass: rgba(15, 23, 42, 0.6);
+  --color-glass-hover: rgba(30, 41, 59, 0.8);
+  --color-glass-border: rgba(59, 130, 246, 0.2);
 
   /* Sidebar - Dark */
   --sidebar-background: oklch(0.205 0 0);
@@ -128,18 +128,51 @@
 }
 
 /* Glass UI Classes */
-.glass-panel {
-  background: var(--color-glass);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--color-glass-border);
+@layer components {
+  .glass-panel {
+    background: var(--color-glass);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--color-glass-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+  }
+
+  .dark .glass-panel {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  .glass-panel-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-panel-hover:hover {
+    background: var(--color-glass-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(37, 99, 235, 0.1);
+  }
+
+  .dark .glass-panel-hover:hover {
+    box-shadow: 0 12px 40px rgba(59, 130, 246, 0.15);
+  }
+
+  .shadow-glow {
+    box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+  }
+
+  .dark .shadow-glow {
+    box-shadow: 0 0 25px rgba(59, 130, 246, 0.6);
+  }
 }
 
-.glass-panel-hover:hover {
-  background: var(--color-glass-hover);
-  border-color: var(--border);
+@layer base {
+  body {
+    @apply selection:bg-primary/30 selection:text-primary;
+  }
+  
+  .dark body {
+    background: radial-gradient(circle at 10% 20%, oklch(0.18 0.02 261) 0%, oklch(0.13 0.028 261) 90%);
+  }
 }
-
 /* Smooth Transitions & Hover States */
 .transition-smooth {
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);

@@ -87,7 +87,7 @@ export function AddWishlistDialog() {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] glass-panel border-border/50">
         <DialogHeader>
-          <DialogTitle className="font-calistoga">Новая цель для покупки</DialogTitle>
+          <DialogTitle className="font-sans font-bold tracking-tight">Новая цель для покупки</DialogTitle>
           <DialogDescription>
             Запланируйте покупку софта, курсов или техники для работы.
           </DialogDescription>

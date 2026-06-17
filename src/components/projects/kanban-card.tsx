@@ -47,7 +47,7 @@ export function KanbanCard({ project }: { project: any }) {
           </div>
 
           <div className="flex items-center justify-between mt-2 pt-2 border-t border-border/50">
-            <span className="text-xs font-calistoga text-accent">
+            <span className="text-xs font-sans font-bold tracking-tight text-accent">
               {new Intl.NumberFormat('ru-RU').format(project.total_price)} {project.currency || 'UZS'}
             </span>
             {project.deadline && (

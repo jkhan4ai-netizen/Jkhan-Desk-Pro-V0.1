@@ -18,7 +18,7 @@ export default async function FinancePage() {
     <div className="flex flex-col gap-6 animate-fade-in">
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
-          <h1 className="font-calistoga text-3xl font-bold tracking-tight">Финансы</h1>
+          <h1 className="font-sans font-bold tracking-tight text-3xl font-bold tracking-tight">Финансы</h1>
           <p className="text-muted-foreground mt-1">Отслеживайте свои доходы, расходы и чистую прибыль.</p>
         </div>
         <div className="flex gap-2">
@@ -40,7 +40,7 @@ export default async function FinancePage() {
               </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold font-calistoga">{formatUZS(stats?.totalReceived || 0)} <span className="text-sm font-sans text-muted-foreground">UZS</span></div>
+              <div className="text-2xl font-bold font-sans font-bold tracking-tight">{formatUZS(stats?.totalReceived || 0)} <span className="text-sm font-sans text-muted-foreground">UZS</span></div>
               <p className="text-xs text-muted-foreground mt-1">
                 Получено на руки
               </p>
@@ -55,7 +55,7 @@ export default async function FinancePage() {
               </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold font-calistoga text-green-500">{formatUZS(stats?.netProfit || 0)} <span className="text-sm font-sans text-muted-foreground">UZS</span></div>
+              <div className="text-2xl font-bold font-sans font-bold tracking-tight text-green-500">{formatUZS(stats?.netProfit || 0)} <span className="text-sm font-sans text-muted-foreground">UZS</span></div>
               <p className="text-xs text-muted-foreground mt-1">
                 После вычета расходов
               </p>
@@ -70,7 +70,7 @@ export default async function FinancePage() {
               </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold font-calistoga text-yellow-500">{formatUZS(stats?.expectedDebts || 0)} <span className="text-sm font-sans text-muted-foreground">UZS</span></div>
+              <div className="text-2xl font-bold font-sans font-bold tracking-tight text-yellow-500">{formatUZS(stats?.expectedDebts || 0)} <span className="text-sm font-sans text-muted-foreground">UZS</span></div>
               <p className="text-xs text-muted-foreground mt-1">
                 Ожидается от клиентов
               </p>
@@ -85,7 +85,7 @@ export default async function FinancePage() {
               </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold font-calistoga text-destructive">{formatUZS(stats?.totalExpenses || 0)} <span className="text-sm font-sans text-muted-foreground">UZS</span></div>
+              <div className="text-2xl font-bold font-sans font-bold tracking-tight text-destructive">{formatUZS(stats?.totalExpenses || 0)} <span className="text-sm font-sans text-muted-foreground">UZS</span></div>
               <p className="text-xs text-muted-foreground mt-1">
                 Софт, подписки, подрядчики
               </p>

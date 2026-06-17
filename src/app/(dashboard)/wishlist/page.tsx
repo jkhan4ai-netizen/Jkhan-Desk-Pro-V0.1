@@ -55,7 +55,7 @@ export default async function WishlistPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="font-calistoga text-3xl font-bold tracking-tight">Список покупок</h1>
+          <h1 className="font-sans font-bold tracking-tight text-3xl font-bold tracking-tight">Список покупок</h1>
           <p className="text-muted-foreground mt-1">Планируйте инвестиции в свою профессию.</p>
         </div>
         <AddWishlistDialog />
@@ -67,7 +67,7 @@ export default async function WishlistPage() {
         
         {/* Planned Items (2 cols) */}
         <div className="lg:col-span-2 flex flex-col gap-4">
-          <h2 className="font-calistoga text-xl mb-2 flex items-center gap-2">
+          <h2 className="font-sans font-bold tracking-tight text-xl mb-2 flex items-center gap-2">
             В планах <Badge variant="secondary" className="rounded-full">{plannedItems.length}</Badge>
           </h2>
           
@@ -100,7 +100,7 @@ export default async function WishlistPage() {
                       <CardDescription className="text-xs line-clamp-2 min-h-[32px]">{item.description}</CardDescription>
                     </CardHeader>
                     <CardContent className="p-4 pt-2">
-                      <div className="text-xl font-calistoga text-accent tabular-nums mb-1">
+                      <div className="text-xl font-sans font-bold tracking-tight text-accent tabular-nums mb-1">
                         {Number(item.price).toLocaleString()} {item.currency}
                       </div>
                       <div className="text-xs text-muted-foreground mb-4">
@@ -139,7 +139,7 @@ export default async function WishlistPage() {
 
         {/* Purchased Items (1 col) */}
         <div className="flex flex-col gap-4">
-          <h2 className="font-calistoga text-xl mb-2 flex items-center gap-2 text-muted-foreground">
+          <h2 className="font-sans font-bold tracking-tight text-xl mb-2 flex items-center gap-2 text-muted-foreground">
             Уже куплено <Badge variant="secondary" className="rounded-full bg-background/50">{purchasedItems.length}</Badge>
           </h2>
           

@@ -14,7 +14,7 @@ export default async function TimerPage() {
       {/* Left Column: Timer */}
       <div className="w-full lg:w-2/3 flex flex-col">
         <div className="mb-6">
-          <h1 className="font-calistoga text-3xl font-bold tracking-tight">Тайм-Менеджмент</h1>
+          <h1 className="font-sans font-bold tracking-tight text-3xl font-bold tracking-tight">Тайм-Менеджмент</h1>
           <p className="text-muted-foreground mt-1">Используйте метод Pomodoro для глубокого фокуса.</p>
         </div>
 
@@ -29,14 +29,14 @@ export default async function TimerPage() {
           <Card className="glass-panel border-border/50">
             <CardContent className="p-4 flex flex-col items-center justify-center text-center">
               <Flame className="h-6 w-6 text-red-500 mb-2" />
-              <div className="text-2xl font-calistoga">{completedPomodoros}</div>
+              <div className="text-2xl font-sans font-bold tracking-tight">{completedPomodoros}</div>
               <div className="text-xs text-muted-foreground">Помидорок сегодня</div>
             </CardContent>
           </Card>
           <Card className="glass-panel border-border/50">
             <CardContent className="p-4 flex flex-col items-center justify-center text-center">
               <CheckCircle2 className="h-6 w-6 text-accent mb-2" />
-              <div className="text-2xl font-calistoga">
+              <div className="text-2xl font-sans font-bold tracking-tight">
                 {Math.floor(totalWorkMinutes / 60)}ч {totalWorkMinutes % 60}м
               </div>
               <div className="text-xs text-muted-foreground">В глубоком фокусе</div>

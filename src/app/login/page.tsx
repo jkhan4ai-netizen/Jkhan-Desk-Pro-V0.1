@@ -56,7 +56,7 @@ export default function LoginPage() {
 
         <Card className="glass-panel border-border/50 shadow-2xl">
           <CardHeader className="space-y-1 text-center">
-            <CardTitle className="font-calistoga text-3xl tracking-tight">
+            <CardTitle className="font-sans font-bold tracking-tight text-3xl tracking-tight">
               {isLoginMode ? "С возвращением" : "Создать аккаунт"}
             </CardTitle>
             <CardDescription className="text-muted-foreground">

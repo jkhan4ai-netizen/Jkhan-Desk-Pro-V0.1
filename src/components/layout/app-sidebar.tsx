@@ -99,7 +99,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <ShieldCheck className="h-5 w-5" />
         </div>
         <div className="ml-3 flex flex-col overflow-hidden transition-all group-data-[collapsible=icon]:hidden">
-          <span className="font-calistoga text-lg leading-tight tracking-tight text-foreground truncate">
+          <span className="font-sans font-bold tracking-tight text-lg leading-tight text-foreground truncate">
             Jkhan Desk Pro
           </span>
           <span className="text-[10px] uppercase font-semibold tracking-wider text-muted-foreground truncate">
@@ -120,7 +120,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild isActive={isActive} tooltip={item.title}>
-                      <a href={item.url} className={`flex items-center gap-3 py-2.5 transition-smooth rounded-md ${isActive ? 'bg-primary/10 text-primary font-medium' : 'hover:bg-muted/50'}`}>
+                      <a href={item.url} className={`flex items-center gap-3 py-2.5 transition-smooth rounded-md ${isActive ? 'bg-primary text-primary-foreground shadow-glow font-medium' : 'hover:bg-muted/50 text-muted-foreground hover:text-foreground'}`}>
                         <item.icon className="h-4 w-4" />
                         <span>{item.title}</span>
                       </a>
@@ -143,7 +143,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild isActive={isActive} tooltip={item.title}>
-                      <a href={item.url} className={`flex items-center gap-3 py-2 transition-smooth rounded-md ${isActive ? 'bg-primary/10 text-primary font-medium' : 'hover:bg-muted/50'}`}>
+                      <a href={item.url} className={`flex items-center gap-3 py-2 transition-smooth rounded-md ${isActive ? 'bg-primary text-primary-foreground shadow-glow font-medium' : 'hover:bg-muted/50 text-muted-foreground hover:text-foreground'}`}>
                         <item.icon className="h-4 w-4" />
                         <span>{item.title}</span>
                       </a>

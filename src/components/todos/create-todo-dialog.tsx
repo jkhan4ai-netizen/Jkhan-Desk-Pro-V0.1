@@ -101,7 +101,7 @@ export function CreateTodoDialog() {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] glass-panel border-border/50">
         <DialogHeader>
-          <DialogTitle className="font-calistoga text-2xl">Новая Задача</DialogTitle>
+          <DialogTitle className="font-sans font-bold tracking-tight text-2xl">Новая Задача</DialogTitle>
           <DialogDescription>
             Запишите задачу, чтобы не забыть. Привяжите её к проекту, если нужно.
           </DialogDescription>

@@ -121,7 +121,7 @@ export function CreateProjectDialog() {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px] glass-panel border-border/50 max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="font-calistoga text-2xl">Создать Проект</DialogTitle>
+          <DialogTitle className="font-sans font-bold tracking-tight text-2xl">Создать Проект</DialogTitle>
           <DialogDescription>
             Укажите детали нового проекта. Предоплата будет учтена автоматически.
           </DialogDescription>

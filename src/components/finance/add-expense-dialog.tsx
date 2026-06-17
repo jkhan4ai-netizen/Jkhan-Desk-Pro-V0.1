@@ -76,7 +76,7 @@ export function AddExpenseDialog() {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] glass-panel border-border/50">
         <DialogHeader>
-          <DialogTitle className="font-calistoga">Новый расход</DialogTitle>
+          <DialogTitle className="font-sans font-bold tracking-tight">Новый расход</DialogTitle>
           <DialogDescription>
             Запишите свои траты на сервисы, софт, аренду, налоги или кредиты.
           </DialogDescription>

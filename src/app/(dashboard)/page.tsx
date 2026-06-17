@@ -21,7 +21,7 @@ export default async function DashboardPage() {
     <>
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-4">
         <div>
-          <h1 className="font-calistoga text-3xl font-bold tracking-tight">Добро пожаловать, Jaloliddin</h1>
+          <h1 className="font-sans font-bold tracking-tight text-3xl font-bold tracking-tight">Добро пожаловать, Jaloliddin</h1>
           <p className="text-muted-foreground mt-1">Вот что происходит с вашими проектами сегодня.</p>
         </div>
         <Button className="bg-accent text-accent-foreground hover:bg-accent/90 transition-smooth shadow-glow-success">
@@ -36,7 +36,7 @@ export default async function DashboardPage() {
             <Briefcase className="h-4 w-4 text-accent" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold font-calistoga">{data.activeProjects}</div>
+            <div className="text-3xl font-bold font-sans font-bold tracking-tight">{data.activeProjects}</div>
             <p className="text-xs text-muted-foreground mt-1 flex items-center">
               В работе на данный момент
             </p>
@@ -51,7 +51,7 @@ export default async function DashboardPage() {
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold font-calistoga">{formatUZS(data.totalRevenue)} <span className="text-sm text-muted-foreground font-sans">UZS</span></div>
+            <div className="text-2xl font-bold font-sans font-bold tracking-tight">{formatUZS(data.totalRevenue)} <span className="text-sm text-muted-foreground font-sans">UZS</span></div>
             <p className="text-xs text-muted-foreground mt-1">
               В этом месяце
             </p>
@@ -64,7 +64,7 @@ export default async function DashboardPage() {
             <Flame className="h-4 w-4 text-red-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold font-calistoga">{hours}ч {minutes}м</div>
+            <div className="text-3xl font-bold font-sans font-bold tracking-tight">{hours}ч {minutes}м</div>
             <p className="text-xs text-muted-foreground mt-1">
               Время в Pomodoro сессиях
             </p>
@@ -79,7 +79,7 @@ export default async function DashboardPage() {
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold font-calistoga">3</div>
+            <div className="text-2xl font-bold font-sans font-bold tracking-tight">3</div>
             <p className="text-xs text-muted-foreground mt-1">
               Требуют внимания
             </p>

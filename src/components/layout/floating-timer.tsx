@@ -65,7 +65,7 @@ export function FloatingTimer() {
               style={{ transition: 'stroke-dashoffset 1s linear' }}
             />
           </svg>
-          <span className="font-calistoga text-xs font-bold tabular-nums">
+          <span className="font-sans font-bold tracking-tight text-xs font-bold tabular-nums">
             {minutes}:{seconds.toString().padStart(2, '0')}
           </span>
         </Link>
