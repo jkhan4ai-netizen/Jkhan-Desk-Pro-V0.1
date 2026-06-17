@@ -47,8 +47,8 @@ export function FloatingTimer() {
     : 100 - (timeLeft / (5 * 60)) * 100
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 animate-in slide-in-from-bottom-5 fade-in duration-300">
-      <div className="glass-panel border-border/50 shadow-glow-accent rounded-2xl p-4 flex items-center gap-4 transition-all hover:scale-[1.02]">
+    <div className="fixed bottom-10 right-10 z-50 animate-in slide-in-from-bottom-5 fade-in duration-300">
+      <div className="bg-white/90 backdrop-blur-md rounded-full px-5 py-3 shadow-[0_8px_30px_rgba(0,0,0,0.08)] border border-white/20 flex items-center gap-4 transition-all hover:scale-[1.02]">
         
         {/* Progress Ring */}
         <Link href="/timer" className="relative flex items-center justify-center w-12 h-12 rounded-full cursor-pointer group">
@@ -71,19 +71,19 @@ export function FloatingTimer() {
         </Link>
 
         {/* Controls */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-2">
           {isRunning ? (
-            <Button size="icon" variant="ghost" className="h-8 w-8 text-foreground" onClick={pauseTimer}>
-              <Pause className="h-4 w-4" />
-            </Button>
+            <button className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-900 hover:bg-gray-200 transition-colors" onClick={pauseTimer}>
+              <Pause className="h-4 w-4 fill-current" />
+            </button>
           ) : (
-            <Button size="icon" variant="ghost" className="h-8 w-8 text-foreground" onClick={startTimer}>
-              <Play className="h-4 w-4" />
-            </Button>
+            <button className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-900 hover:bg-gray-200 transition-colors" onClick={startTimer}>
+              <Play className="h-4 w-4 fill-current" />
+            </button>
           )}
-          <Button size="icon" variant="ghost" className="h-8 w-8 text-muted-foreground hover:text-foreground" onClick={resetTimer}>
+          <button className="w-8 h-8 rounded-full bg-transparent flex items-center justify-center text-gray-500 hover:bg-gray-100 hover:text-gray-900 transition-colors" onClick={resetTimer}>
             <TimerReset className="h-4 w-4" />
-          </Button>
+          </button>
         </div>
       </div>
     </div>

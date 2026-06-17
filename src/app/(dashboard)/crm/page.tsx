@@ -17,16 +17,16 @@ export default async function CrmPage() {
           <p className="text-muted-foreground mt-1">Управляйте базой заказчиков и контактными данными.</p>
         </div>
         <div className="flex gap-2">
-          <Button className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-glow-success">
+          <Button className="bg-gray-900 text-white rounded-full hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300">
             <Plus className="mr-2 h-4 w-4" /> Новый Клиент
           </Button>
         </div>
       </div>
 
-      <Card className="glass-panel border-border/50 animate-fade-in">
+      <Card className="border-gray-100/50">
         <CardHeader>
-          <CardTitle>База Клиентов</CardTitle>
-          <CardDescription>Все клиенты, с которыми вы когда-либо работали.</CardDescription>
+          <CardTitle className="text-lg font-semibold text-gray-900">База Клиентов</CardTitle>
+          <CardDescription className="text-sm font-medium text-gray-500">Все клиенты, с которыми вы когда-либо работали.</CardDescription>
         </CardHeader>
         <CardContent>
           {error ? (
@@ -36,37 +36,37 @@ export default async function CrmPage() {
           ) : clients && clients.length > 0 ? (
             <Table>
               <TableHeader>
-                <TableRow className="border-border/50 hover:bg-transparent">
-                  <TableHead>Имя</TableHead>
-                  <TableHead>Компания</TableHead>
-                  <TableHead>Контакты</TableHead>
-                  <TableHead>Статус</TableHead>
-                  <TableHead className="w-[50px]"></TableHead>
+                <TableRow className="border-b border-gray-50/80 hover:bg-transparent">
+                  <TableHead className="text-xs font-semibold text-gray-400 uppercase tracking-wider pb-4">Имя</TableHead>
+                  <TableHead className="text-xs font-semibold text-gray-400 uppercase tracking-wider pb-4">Компания</TableHead>
+                  <TableHead className="text-xs font-semibold text-gray-400 uppercase tracking-wider pb-4">Контакты</TableHead>
+                  <TableHead className="text-xs font-semibold text-gray-400 uppercase tracking-wider pb-4">Статус</TableHead>
+                  <TableHead className="w-[50px] pb-4"></TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {clients.map((client: any) => (
-                  <TableRow key={client.id} className="border-border/50 hover:bg-muted/40 transition-smooth cursor-pointer">
-                    <TableCell className="font-medium text-foreground">{client.name}</TableCell>
-                    <TableCell className="text-muted-foreground">{client.company || '—'}</TableCell>
-                    <TableCell>
-                      <div className="flex flex-col gap-1 text-xs text-muted-foreground">
+                  <TableRow key={client.id} className="border-b border-gray-50/80 hover:bg-gray-50/50 transition-colors duration-200 cursor-pointer">
+                    <TableCell className="font-medium text-gray-700 py-4">{client.name}</TableCell>
+                    <TableCell className="text-gray-500 py-4">{client.company || '—'}</TableCell>
+                    <TableCell className="py-4">
+                      <div className="flex flex-col gap-1 text-xs text-gray-500">
                         {client.phone && <span className="flex items-center gap-1"><Phone className="h-3 w-3" /> {client.phone}</span>}
                         {client.email && <span className="flex items-center gap-1"><Mail className="h-3 w-3" /> {client.email}</span>}
                         {!client.phone && !client.email && '—'}
                       </div>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="py-4">
                       <Badge variant="outline" className={
-                        client.status === 'NEW' ? 'border-blue-500 text-blue-500' :
+                        client.status === 'NEW' ? 'border-blue-200 text-blue-500 bg-blue-50' :
                         client.status === 'REGULAR' ? 'border-accent text-accent' :
-                        client.status === 'VIP' ? 'border-purple-500 text-purple-500' :
-                        'border-muted-foreground text-muted-foreground'
+                        client.status === 'VIP' ? 'border-purple-500 text-purple-500 bg-purple-50' :
+                        'border-gray-200 text-gray-500 bg-gray-50'
                       }>
                         {client.status}
                       </Badge>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="py-4">
                       <EditClientDialog client={client} />
                     </TableCell>
                   </TableRow>

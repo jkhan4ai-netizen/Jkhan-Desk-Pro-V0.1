@@ -93,9 +93,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname()
 
   return (
-    <Sidebar collapsible="icon" {...props} className="border-r border-border/50">
-      <SidebarHeader className="flex flex-row items-center pt-6 pb-4 px-4">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent text-accent-foreground shadow-sm animate-fade-in">
+    <Sidebar collapsible="icon" {...props} className="w-64 flex flex-col bg-transparent border-r border-gray-200/50 py-6 px-4">
+      <SidebarHeader className="flex flex-row items-center pb-4 px-2">
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gray-900 text-white shadow-sm animate-fade-in">
           <ShieldCheck className="h-5 w-5" />
         </div>
         <div className="ml-3 flex flex-col overflow-hidden transition-all group-data-[collapsible=icon]:hidden">
@@ -108,9 +108,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </div>
       </SidebarHeader>
       
-      <SidebarContent className="px-2 mt-4">
+      <SidebarContent className="px-2 mt-4 flex flex-col gap-6">
         <SidebarGroup>
-          <SidebarGroupLabel className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">
+          <SidebarGroupLabel className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
             Меню
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -120,7 +120,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild isActive={isActive} tooltip={item.title}>
-                      <a href={item.url} className={`flex items-center gap-3 py-2.5 transition-smooth rounded-full ${isActive ? 'bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-glow font-medium' : 'hover:bg-muted text-muted-foreground hover:text-foreground'}`}>
+                      <a href={item.url} className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${isActive ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:bg-gray-200/50'}`}>
                         <item.icon className="h-4 w-4" />
                         <span>{item.title}</span>
                       </a>
@@ -132,8 +132,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        <SidebarGroup className="mt-auto pt-4">
-          <SidebarGroupLabel className="text-xs font-medium text-muted-foreground uppercase tracking-wider mb-2">
+        <SidebarGroup>
+          <SidebarGroupLabel className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
             Система
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -143,7 +143,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild isActive={isActive} tooltip={item.title}>
-                      <a href={item.url} className={`flex items-center gap-3 py-2 transition-smooth rounded-full ${isActive ? 'bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-glow font-medium' : 'hover:bg-muted text-muted-foreground hover:text-foreground'}`}>
+                      <a href={item.url} className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${isActive ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:bg-gray-200/50'}`}>
                         <item.icon className="h-4 w-4" />
                         <span>{item.title}</span>
                       </a>
