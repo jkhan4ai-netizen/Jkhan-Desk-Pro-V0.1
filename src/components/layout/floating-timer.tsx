@@ -48,7 +48,7 @@ export function FloatingTimer() {
 
   return (
     <div className="fixed bottom-10 right-10 z-50 animate-in slide-in-from-bottom-5 fade-in duration-300">
-      <div className="bg-white/90 backdrop-blur-md rounded-full px-5 py-3 shadow-[0_8px_30px_rgba(0,0,0,0.08)] border border-white/20 flex items-center gap-4 transition-all hover:scale-[1.02]">
+      <div className="bg-surface-container-lowest/90 backdrop-blur-md rounded-full px-5 py-3 shadow-overlay border border-border flex items-center gap-4 transition-all hover:scale-[1.02]">
         
         {/* Progress Ring */}
         <Link href="/timer" className="relative flex items-center justify-center w-12 h-12 rounded-full cursor-pointer group">
@@ -73,15 +73,15 @@ export function FloatingTimer() {
         {/* Controls */}
         <div className="flex items-center gap-2">
           {isRunning ? (
-            <button className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-900 hover:bg-gray-200 transition-colors" onClick={pauseTimer}>
+            <button className="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-[var(--on-surface)] hover:bg-surface-container-high transition-colors" onClick={pauseTimer}>
               <Pause className="h-4 w-4 fill-current" />
             </button>
           ) : (
-            <button className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-900 hover:bg-gray-200 transition-colors" onClick={startTimer}>
+            <button className="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-[var(--on-surface)] hover:bg-surface-container-high transition-colors" onClick={startTimer}>
               <Play className="h-4 w-4 fill-current" />
             </button>
           )}
-          <button className="w-8 h-8 rounded-full bg-transparent flex items-center justify-center text-gray-500 hover:bg-gray-100 hover:text-gray-900 transition-colors" onClick={resetTimer}>
+          <button className="w-8 h-8 rounded-full bg-transparent flex items-center justify-center text-[var(--on-surface-variant)] hover:bg-surface-container hover:text-[var(--on-surface)] transition-colors" onClick={resetTimer}>
             <TimerReset className="h-4 w-4" />
           </button>
         </div>

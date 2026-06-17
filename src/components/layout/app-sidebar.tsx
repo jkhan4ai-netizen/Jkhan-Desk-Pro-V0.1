@@ -104,7 +104,7 @@ export function AppSidebar({ dict, ...props }: React.ComponentProps<typeof Sideb
       
       <SidebarContent className="px-2 mt-4 flex flex-col gap-6">
         <SidebarGroup>
-          <SidebarGroupLabel className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+          <SidebarGroupLabel className="text-xs font-semibold text-[var(--on-surface-variant)] uppercase tracking-wider mb-2">
             {dict?.menu || "Меню"}
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -114,7 +114,7 @@ export function AppSidebar({ dict, ...props }: React.ComponentProps<typeof Sideb
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild isActive={isActive} tooltip={item.title}>
-                      <a href={item.url} className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${isActive ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:bg-gray-200/50'}`}>
+                      <a href={item.url} className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${isActive ? 'bg-[var(--primary-container)] text-[var(--on-primary-container)] shadow-none' : 'text-[var(--on-surface-variant)] hover:bg-[var(--surface-container-high)] hover:text-[var(--on-surface)]'}`}>
                         <item.icon className="h-4 w-4" />
                         <span>{item.title}</span>
                       </a>
@@ -127,7 +127,7 @@ export function AppSidebar({ dict, ...props }: React.ComponentProps<typeof Sideb
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+          <SidebarGroupLabel className="text-xs font-semibold text-[var(--on-surface-variant)] uppercase tracking-wider mb-2">
             {dict?.system || "Система"}
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -137,7 +137,7 @@ export function AppSidebar({ dict, ...props }: React.ComponentProps<typeof Sideb
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild isActive={isActive} tooltip={item.title}>
-                      <a href={item.url} className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${isActive ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:bg-gray-200/50'}`}>
+                      <a href={item.url} className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${isActive ? 'bg-[var(--primary-container)] text-[var(--on-primary-container)] shadow-none' : 'text-[var(--on-surface-variant)] hover:bg-[var(--surface-container-high)] hover:text-[var(--on-surface)]'}`}>
                         <item.icon className="h-4 w-4" />
                         <span>{item.title}</span>
                       </a>

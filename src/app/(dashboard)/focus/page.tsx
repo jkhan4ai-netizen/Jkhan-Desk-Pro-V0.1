@@ -108,8 +108,8 @@ export default async function FocusPage() {
         
         <div className="flex-1 overflow-y-auto pr-2 pb-24">
           {pendingTodos.length === 0 ? (
-            <div className="text-center py-12 text-muted-foreground bg-white rounded-[24px] border border-gray-100/50 shadow-sm">
-              <CheckCircle2 className="mx-auto h-12 w-12 text-gray-300 mb-4" />
+            <div className="text-center py-12 text-[var(--on-surface-variant)] bg-surface-container-lowest rounded-xl border border-border shadow-none">
+              <CheckCircle2 className="mx-auto h-12 w-12 text-[var(--outline-variant)] mb-4" />
               <p>{dict.dashboard.allTasksDone}</p>
             </div>
           ) : (
