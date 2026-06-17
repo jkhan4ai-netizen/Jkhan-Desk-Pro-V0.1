@@ -120,7 +120,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild isActive={isActive} tooltip={item.title}>
-                      <a href={item.url} className={`flex items-center gap-3 py-2.5 transition-smooth rounded-md ${isActive ? 'bg-primary text-primary-foreground shadow-glow font-medium' : 'hover:bg-muted/50 text-muted-foreground hover:text-foreground'}`}>
+                      <a href={item.url} className={`flex items-center gap-3 py-2.5 transition-smooth rounded-full ${isActive ? 'bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-glow font-medium' : 'hover:bg-muted text-muted-foreground hover:text-foreground'}`}>
                         <item.icon className="h-4 w-4" />
                         <span>{item.title}</span>
                       </a>
@@ -143,7 +143,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild isActive={isActive} tooltip={item.title}>
-                      <a href={item.url} className={`flex items-center gap-3 py-2 transition-smooth rounded-md ${isActive ? 'bg-primary text-primary-foreground shadow-glow font-medium' : 'hover:bg-muted/50 text-muted-foreground hover:text-foreground'}`}>
+                      <a href={item.url} className={`flex items-center gap-3 py-2 transition-smooth rounded-full ${isActive ? 'bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-glow font-medium' : 'hover:bg-muted text-muted-foreground hover:text-foreground'}`}>
                         <item.icon className="h-4 w-4" />
                         <span>{item.title}</span>
                       </a>
@@ -158,7 +158,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
       <SidebarFooter className="p-4">
         <form action={signout}>
-          <button type="submit" className="w-full flex items-center gap-3 p-2 rounded-lg bg-muted/40 hover:bg-muted/60 transition-smooth cursor-pointer border border-transparent hover:border-destructive/50 hover:text-destructive group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-2">
+          <button type="submit" className="w-full flex items-center gap-3 p-2 rounded-[1.5rem] bg-muted/40 hover:bg-muted/80 transition-smooth cursor-pointer border border-transparent hover:border-destructive/50 hover:text-destructive group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-2">
             <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
               <span className="text-xs font-bold text-primary-foreground">JK</span>
             </div>

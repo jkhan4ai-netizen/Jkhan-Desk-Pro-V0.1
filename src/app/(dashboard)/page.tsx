@@ -24,12 +24,12 @@ export default async function DashboardPage() {
           <h1 className="font-sans font-bold tracking-tight text-3xl font-bold tracking-tight">Добро пожаловать, Jkhan</h1>
           <p className="text-muted-foreground mt-1">Вот что происходит с вашими проектами сегодня.</p>
         </div>
-        <Button className="bg-accent text-accent-foreground hover:bg-accent/90 transition-smooth shadow-glow-success">
+        <Button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-full hover:scale-105 transition-transform shadow-glow">
           <Play className="mr-2 h-4 w-4" /> Запустить Таймер
         </Button>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
         <Card className="glass-panel border-border/50 animate-fade-in" style={{ animationDelay: "0.1s" }}>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Активные Проекты</CardTitle>
@@ -87,7 +87,7 @@ export default async function DashboardPage() {
         </Card>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-7 lg:grid-cols-7 mt-4">
+      <div className="grid gap-8 md:grid-cols-7 lg:grid-cols-7 mt-8">
         {/* Pending Tasks */}
         <Card className="col-span-4 lg:col-span-4 glass-panel border-border/50">
           <CardHeader>

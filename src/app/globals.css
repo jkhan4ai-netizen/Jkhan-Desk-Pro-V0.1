@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.97 0.01 260); /* Soft light grayish blue */
+  --background: oklch(0.97 0.01 260); /* #F3F5F9 - Soft grayish blue */
   --foreground: oklch(0.145 0 0); /* 0F172A - slate-900 */
   --card: oklch(1 0 0); /* Pure white */
   --card-foreground: oklch(0.145 0 0);
@@ -21,15 +21,15 @@
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.922 0 0);
+  --border: oklch(0.97 0 0); /* Very subtle almost invisible border */
   --input: oklch(0.922 0 0);
   --ring: oklch(0.5 0.15 250);
-  --radius: 1.5rem; /* Big round corners for light theme */
+  --radius: 1.5rem; 
 
   /* Custom Glass UI Tokens */
-  --color-glass: rgba(255, 255, 255, 0.85);
-  --color-glass-hover: rgba(255, 255, 255, 1);
-  --color-glass-border: rgba(255, 255, 255, 1);
+  --color-glass: rgba(255, 255, 255, 0.6);
+  --color-glass-hover: rgba(255, 255, 255, 0.9);
+  --color-glass-border: rgba(255, 255, 255, 0.8);
 
   /* Sidebar */
   --sidebar-width: 16rem;
@@ -147,8 +147,8 @@
 
   .glass-panel-hover:hover {
     background: var(--color-glass-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.1);
   }
 
   .dark .glass-panel-hover:hover {
@@ -173,7 +173,11 @@
     background: radial-gradient(circle at 10% 20%, oklch(0.18 0.02 261) 0%, oklch(0.13 0.028 261) 90%);
   }
 }
-/* Smooth Transitions & Hover States */
+/* Smooth Transitions & Soft Shadows */
 .transition-smooth {
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.soft-shadow {
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
 }
