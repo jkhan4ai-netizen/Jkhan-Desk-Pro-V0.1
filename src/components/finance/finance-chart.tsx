@@ -18,7 +18,7 @@ export function FinanceChart({ data }: FinanceChartProps) {
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="glass-panel border border-border/50 p-3 shadow-lg rounded-xl flex flex-col gap-2 min-w-[150px]">
+        <div className="bg-surface-container-lowest border border-border p-3 shadow-overlay rounded-xl flex flex-col gap-2 min-w-[150px]">
           <p className="font-medium text-sm border-b border-border/50 pb-1 mb-1">{label}</p>
           {payload.map((entry: any, index: number) => (
             <div key={index} className="flex items-center justify-between gap-4 text-xs">
@@ -27,7 +27,7 @@ export function FinanceChart({ data }: FinanceChartProps) {
                   className="w-2 h-2 rounded-full" 
                   style={{ backgroundColor: entry.color }} 
                 />
-                <span className="text-muted-foreground">{entry.name === 'income' ? 'Доход' : 'Расход'}</span>
+                <span className="text-[var(--on-surface-variant)]">{entry.name === 'income' ? 'Доход' : 'Расход'}</span>
               </div>
               <span className="font-medium tabular-nums font-mono">
                 {new Intl.NumberFormat('ru-RU').format(entry.value)}
@@ -41,7 +41,7 @@ export function FinanceChart({ data }: FinanceChartProps) {
   };
 
   return (
-    <Card className="glass-panel border-border/50 mt-4 overflow-hidden">
+    <Card className="bg-surface-container-lowest border-border mt-4 overflow-hidden shadow-none">
       <CardHeader className="pb-2">
         <CardTitle className="text-lg">Аналитика доходов и расходов</CardTitle>
         <CardDescription>Динамика за последние 6 месяцев (в базовой валюте).</CardDescription>
@@ -60,12 +60,12 @@ export function FinanceChart({ data }: FinanceChartProps) {
             >
               <defs>
                 <linearGradient id="colorIncome" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.4}/>
-                  <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="var(--primary)" stopOpacity={0.4}/>
+                  <stop offset="95%" stopColor="var(--primary)" stopOpacity={0}/>
                 </linearGradient>
                 <linearGradient id="colorExpense" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="hsl(var(--destructive))" stopOpacity={0.2}/>
-                  <stop offset="95%" stopColor="hsl(var(--destructive))" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="var(--error)" stopOpacity={0.2}/>
+                  <stop offset="95%" stopColor="var(--error)" stopOpacity={0}/>
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border)" opacity={0.4} />
@@ -73,13 +73,13 @@ export function FinanceChart({ data }: FinanceChartProps) {
                 dataKey="name" 
                 axisLine={false} 
                 tickLine={false} 
-                tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
+                tick={{ fontSize: 12, fill: "var(--on-surface-variant)" }}
                 dy={10}
               />
               <YAxis 
                 axisLine={false} 
                 tickLine={false} 
-                tick={{ fontSize: 11, fill: "hsl(var(--muted-foreground))" }}
+                tick={{ fontSize: 11, fill: "var(--on-surface-variant)" }}
                 tickFormatter={(value) => `${(value / 1000000).toFixed(1)}M`}
                 dx={-10}
               />
@@ -88,22 +88,22 @@ export function FinanceChart({ data }: FinanceChartProps) {
                 type="monotone" 
                 dataKey="income" 
                 name="income"
-                stroke="hsl(var(--primary))" 
+                stroke="var(--primary)" 
                 strokeWidth={3}
                 fillOpacity={1} 
                 fill="url(#colorIncome)" 
-                activeDot={{ r: 5, strokeWidth: 0, fill: "hsl(var(--primary))", style: { filter: "drop-shadow(0px 0px 8px rgba(37,99,235,0.8))" } }}
+                activeDot={{ r: 5, strokeWidth: 0, fill: "var(--primary)", style: { filter: "drop-shadow(0px 0px 8px rgba(37,99,235,0.8))" } }}
                 style={{ filter: "drop-shadow(0px 4px 8px rgba(37,99,235,0.2))" }}
               />
               <Area 
                 type="monotone" 
                 dataKey="expense" 
                 name="expense"
-                stroke="hsl(var(--destructive))" 
+                stroke="var(--error)" 
                 strokeWidth={2}
                 fillOpacity={1} 
                 fill="url(#colorExpense)" 
-                activeDot={{ r: 4, strokeWidth: 0, fill: "hsl(var(--destructive))" }}
+                activeDot={{ r: 4, strokeWidth: 0, fill: "var(--error)" }}
               />
             </AreaChart>
           </ResponsiveContainer>
