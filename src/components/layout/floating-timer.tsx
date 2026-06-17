@@ -31,8 +31,8 @@ export function FloatingTimer() {
     return () => clearInterval(interval)
   }, [isRunning, timeLeft, tick, pauseTimer])
 
-  // Don't show the floating widget if we are ON the timer page itself
-  if (!mounted || pathname === "/timer") return null
+  // Don't show the floating widget if we are ON the focus page itself
+  if (!mounted || pathname === "/focus") return null
 
   // Don't show if the timer hasn't started and we are not in the middle of a session
   // Usually, we want the widget if it's running, or paused but partway through.
@@ -51,7 +51,7 @@ export function FloatingTimer() {
       <div className="bg-white/90 backdrop-blur-md rounded-full px-5 py-3 shadow-[0_8px_30px_rgba(0,0,0,0.08)] border border-white/20 flex items-center gap-4 transition-all hover:scale-[1.02]">
         
         {/* Progress Ring */}
-        <Link href="/timer" className="relative flex items-center justify-center w-12 h-12 rounded-full cursor-pointer group">
+        <Link href="/focus" className="relative flex items-center justify-center w-12 h-12 rounded-full cursor-pointer group">
           <svg className="absolute top-0 left-0 w-full h-full transform -rotate-90">
             <circle cx="24" cy="24" r="22" stroke="currentColor" strokeWidth="2" fill="transparent" className="text-muted opacity-30" />
             <circle 

@@ -55,13 +55,8 @@ const data = {
       icon: Wallet,
     },
     {
-      title: "Задачи",
-      url: "/todos",
-      icon: CheckSquare,
-    },
-    {
-      title: "Таймер",
-      url: "/timer",
+      title: "Фокус",
+      url: "/focus",
       icon: Clock,
     },
     {
