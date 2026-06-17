@@ -64,7 +64,7 @@ export async function createTodo(formData: FormData) {
     return { error: error.message }
   }
 
-  revalidatePath("/focus");
+  revalidatePath("/todos");
   return { success: true, todo: data[0] }
 }
 
@@ -83,6 +83,6 @@ export async function updateTodoStatus(id: string, status: string) {
     return { error: error.message }
   }
 
-  revalidatePath("/focus");
+  revalidatePath("/todos");
   return { success: true }
 }

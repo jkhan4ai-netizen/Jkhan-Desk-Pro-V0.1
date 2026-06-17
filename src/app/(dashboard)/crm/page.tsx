@@ -5,28 +5,31 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Plus, Users, Mail, Phone } from "lucide-react"
 import { EditClientDialog } from "@/components/crm/edit-client-dialog"
+import { getLang, getDictionary } from "@/i18n/dict"
 
 export default async function CrmPage() {
+  const lang = await getLang();
+  const dict = getDictionary(lang);
   const { clients, error } = await getClients();
 
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
-          <h1 className="font-sans font-bold tracking-tight text-3xl font-bold tracking-tight">Клиенты (CRM)</h1>
-          <p className="text-muted-foreground mt-1">Управляйте базой заказчиков и контактными данными.</p>
+          <h1 className="font-sans font-bold tracking-tight text-3xl font-bold tracking-tight">{dict.crm.title}</h1>
+          <p className="text-muted-foreground mt-1">{dict.crm.subtitle}</p>
         </div>
         <div className="flex gap-2">
           <Button className="bg-gray-900 text-white rounded-full hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300">
-            <Plus className="mr-2 h-4 w-4" /> Новый Клиент
+            <Plus className="mr-2 h-4 w-4" /> {dict.crm.newClient}
           </Button>
         </div>
       </div>
 
       <Card className="border-gray-100/50">
         <CardHeader>
-          <CardTitle className="text-lg font-semibold text-gray-900">База Клиентов</CardTitle>
-          <CardDescription className="text-sm font-medium text-gray-500">Все клиенты, с которыми вы когда-либо работали.</CardDescription>
+          <CardTitle className="text-lg font-semibold text-gray-900">{dict.crm.database}</CardTitle>
+          <CardDescription className="text-sm font-medium text-gray-500">{dict.crm.dbDesc}</CardDescription>
         </CardHeader>
         <CardContent>
           {error ? (
@@ -37,10 +40,10 @@ export default async function CrmPage() {
             <Table>
               <TableHeader>
                 <TableRow className="border-b border-gray-50/80 hover:bg-transparent">
-                  <TableHead className="text-xs font-semibold text-gray-400 uppercase tracking-wider pb-4">Имя</TableHead>
-                  <TableHead className="text-xs font-semibold text-gray-400 uppercase tracking-wider pb-4">Компания</TableHead>
-                  <TableHead className="text-xs font-semibold text-gray-400 uppercase tracking-wider pb-4">Контакты</TableHead>
-                  <TableHead className="text-xs font-semibold text-gray-400 uppercase tracking-wider pb-4">Статус</TableHead>
+                  <TableHead className="text-xs font-semibold text-gray-400 uppercase tracking-wider pb-4">{dict.crm.name}</TableHead>
+                  <TableHead className="text-xs font-semibold text-gray-400 uppercase tracking-wider pb-4">{dict.crm.company}</TableHead>
+                  <TableHead className="text-xs font-semibold text-gray-400 uppercase tracking-wider pb-4">{dict.crm.contacts}</TableHead>
+                  <TableHead className="text-xs font-semibold text-gray-400 uppercase tracking-wider pb-4">{dict.crm.status}</TableHead>
                   <TableHead className="w-[50px] pb-4"></TableHead>
                 </TableRow>
               </TableHeader>
@@ -78,12 +81,12 @@ export default async function CrmPage() {
               <div className="h-12 w-12 rounded-full bg-muted/50 flex items-center justify-center mb-4 text-muted-foreground">
                 <Users className="h-6 w-6" />
               </div>
-              <h3 className="text-lg font-medium text-foreground mb-1">Нет клиентов</h3>
+              <h3 className="text-lg font-medium text-foreground mb-1">{dict.crm.noClients}</h3>
               <p className="text-sm text-muted-foreground mb-4 max-w-sm">
-                В вашей базе пока нет клиентов. Они будут добавлены автоматически при создании проекта, либо вы можете добавить их вручную.
+                {dict.crm.noClientsDesc}
               </p>
-              <Button className="bg-accent text-accent-foreground hover:bg-accent/90">
-                <Plus className="mr-2 h-4 w-4" /> Добавить клиента
+              <Button className="bg-gray-900 text-white rounded-full">
+                <Plus className="mr-2 h-4 w-4" /> {dict.crm.newClient}
               </Button>
             </div>
           )}

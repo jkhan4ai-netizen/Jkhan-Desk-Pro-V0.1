@@ -1,86 +1,108 @@
 import { getProjects } from "@/lib/actions/projects"
-import { Filter, Search, Plus, LayoutGrid, Clock, List, ChevronLeft } from "lucide-react"
-import { AccordionList } from "@/components/projects/accordion-list"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Filter, Briefcase, LayoutGrid, List } from "lucide-react"
 import { CreateProjectDialog } from "@/components/projects/create-project-dialog"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { KanbanBoard } from "@/components/projects/kanban-board"
 
 export default async function ProjectsPage() {
   const { projects, error } = await getProjects();
 
   return (
-    <div className="flex flex-col h-full bg-white animate-fade-in -mt-6">
-      {/* Custom Breadcrumb-like Header just for this view to match reference */}
-      <div className="flex items-center gap-2 text-sm text-gray-500 mb-6 pt-6">
-        <ChevronLeft className="w-4 h-4 cursor-pointer hover:text-gray-900" />
-        <span>My Pages /</span>
-        <span className="text-gray-900 font-medium">Craftboard Project</span>
-        
-        <div className="ml-auto flex items-center gap-4">
-          <button className="flex items-center gap-2 text-gray-600 hover:text-gray-900 text-sm">
-            <Plus className="w-4 h-4" /> New Tab
-          </button>
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div>
+          <h1 className="font-sans font-bold tracking-tight text-3xl font-bold tracking-tight">Управление Проектами</h1>
+          <p className="text-muted-foreground mt-1">Отслеживайте статусы, финансы и дедлайны по всем вашим проектам.</p>
         </div>
-      </div>
-
-      {/* Main Header */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
-        <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-[#4F46E5] text-white flex items-center justify-center text-2xl font-bold">
-            C
-          </div>
-          <h1 className="text-2xl font-bold tracking-tight text-gray-900">Craftboard Project</h1>
-        </div>
-        
-        <div className="flex items-center gap-4">
-          <div className="flex items-center">
-            <div className="w-8 h-8 rounded-full border-2 border-white bg-blue-100 flex items-center justify-center text-[10px] font-bold text-blue-600 z-20">AL</div>
-            <div className="w-8 h-8 rounded-full border-2 border-white bg-green-100 flex items-center justify-center text-[10px] font-bold text-green-600 -ml-2 z-10">DT</div>
-            <div className="w-8 h-8 rounded-full border-2 border-white bg-gray-200 -ml-2 z-0"></div>
-          </div>
+        <div className="flex gap-2">
           <CreateProjectDialog />
         </div>
       </div>
 
-      {/* Custom Tabs and Content */}
-      <Tabs defaultValue="list" className="w-full flex-1 flex flex-col">
-        <div className="border-b border-gray-100 mb-2">
-          <TabsList className="bg-transparent h-auto p-0 flex gap-6">
-            <TabsTrigger 
-              value="kanban" 
-              className="pb-3 pt-0 px-0 rounded-none border-b-2 border-transparent data-[state=active]:border-gray-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:text-gray-900 text-gray-500 font-medium"
-            >
-              <LayoutGrid className="w-4 h-4 mr-2" />
-              Kanban
+      <Tabs defaultValue="board" className="w-full">
+        <div className="flex items-center justify-between mb-4">
+          <TabsList className="bg-background/50 border border-border/50">
+            <TabsTrigger value="board" className="data-[state=active]:bg-primary/20 data-[state=active]:text-primary">
+              <LayoutGrid className="h-4 w-4 mr-2" /> Доска
             </TabsTrigger>
-            <TabsTrigger 
-              value="timeline" 
-              className="pb-3 pt-0 px-0 rounded-none border-b-2 border-transparent data-[state=active]:border-gray-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:text-gray-900 text-gray-500 font-medium"
-            >
-              <Clock className="w-4 h-4 mr-2" />
-              Timeline
-            </TabsTrigger>
-            <TabsTrigger 
-              value="list" 
-              className="pb-3 pt-0 px-0 rounded-none border-b-2 border-transparent data-[state=active]:border-gray-900 data-[state=active]:bg-transparent data-[state=active]:shadow-none data-[state=active]:text-gray-900 text-gray-500 font-medium"
-            >
-              <List className="w-4 h-4 mr-2" />
-              List
+            <TabsTrigger value="list" className="data-[state=active]:bg-primary/20 data-[state=active]:text-primary">
+              <List className="h-4 w-4 mr-2" /> Список
             </TabsTrigger>
           </TabsList>
         </div>
 
-        <TabsContent value="kanban" className="m-0 focus-visible:outline-none flex-1 py-4">
-          <div className="text-gray-500 text-center mt-12">Kanban Board (Not implemented in this view)</div>
+        <TabsContent value="board" className="m-0 focus-visible:outline-none focus-visible:ring-0">
+          <KanbanBoard initialProjects={projects || []} />
         </TabsContent>
 
-        <TabsContent value="timeline" className="m-0 focus-visible:outline-none flex-1 py-4">
-          <div className="text-gray-500 text-center mt-12">Timeline View (Not implemented in this view)</div>
-        </TabsContent>
-
-        <TabsContent value="list" className="m-0 focus-visible:outline-none flex-1">
-          <AccordionList initialTodos={projects || []} />
-        </TabsContent>
-      </Tabs>
-    </div>
+        <TabsContent value="list" className="m-0 focus-visible:outline-none focus-visible:ring-0">
+          <Card className="glass-panel border-border/50 animate-fade-in">
+        <CardHeader>
+          <CardTitle>Все Проекты</CardTitle>
+          <CardDescription>Полный список ваших текущих и завершенных проектов.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          {error ? (
+            <div className="p-4 text-center text-destructive bg-destructive/10 rounded-md border border-destructive/20">
+              Ошибка при загрузке данных: {error}
+              <br />
+              Убедитесь, что база данных Supabase настроена и RLS политики позволяют чтение.
+            </div>
+          ) : projects && projects.length > 0 ? (
+            <Table>
+              <TableHeader>
+                <TableRow className="border-border/50 hover:bg-transparent">
+                  <TableHead>ID</TableHead>
+                  <TableHead>Название</TableHead>
+                  <TableHead>Клиент</TableHead>
+                  <TableHead>Статус</TableHead>
+                  <TableHead className="text-right">Бюджет</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {projects.map((project: any) => (
+                  <TableRow key={project.id} className="border-border/50 hover:bg-muted/40 transition-smooth cursor-pointer">
+                    <TableCell className="font-mono text-xs text-muted-foreground">{project.display_id}</TableCell>
+                    <TableCell className="font-medium text-foreground">{project.title}</TableCell>
+                    <TableCell>{project.clients?.name || '—'}</TableCell>
+                    <TableCell>
+                      <Badge variant="outline" className={
+                        project.status === 'NEW' ? 'border-blue-500 text-blue-500' :
+                        project.status === 'IN_PROGRESS' ? 'border-accent text-accent' :
+                        project.status === 'READY' ? 'border-yellow-500 text-yellow-500' :
+                        project.status === 'PAID' ? 'border-green-500 text-green-500' :
+                        'border-muted-foreground text-muted-foreground'
+                      }>
+                        {project.status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="text-right font-medium">
+                      {new Intl.NumberFormat('ru-RU').format(project.total_price)} {project.currency || 'UZS'}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          ) : (
+            <div className="flex flex-col items-center justify-center py-12 text-center">
+              <div className="h-12 w-12 rounded-full bg-muted/50 flex items-center justify-center mb-4 text-muted-foreground">
+                <Briefcase className="h-6 w-6" />
+              </div>
+              <h3 className="text-lg font-medium text-foreground mb-1">Нет проектов</h3>
+              <p className="text-sm text-muted-foreground mb-4 max-w-sm">
+                Вы еще не создали ни одного проекта. Нажмите кнопку, чтобы начать.
+              </p>
+              <CreateProjectDialog />
+            </div>
+          )}
+          </CardContent>
+        </Card>
+      </TabsContent>
+    </Tabs>
+  </div>
   )
 }

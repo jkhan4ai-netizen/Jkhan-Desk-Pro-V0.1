@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="ru" suppressHydrationWarning>
       <body
-        className={`${inter.variable} font-sans antialiased bg-background-light dark:bg-background-dark text-text-main-light dark:text-text-main-dark h-screen overflow-hidden flex items-center justify-center p-4 lg:p-8`}
+        className={`${inter.variable} font-sans antialiased bg-[#EBF0F2] text-[#111827]`}
       >
         <ThemeProvider
           attribute="class"
@@ -31,8 +31,10 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <div className="w-full max-w-[1600px] h-full flex bg-surface-light dark:bg-surface-dark rounded-xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] overflow-hidden border border-border-light dark:border-border-dark">
-            {children}
+          <div className="h-screen w-full bg-[#EBF0F2] p-4 md:p-6 box-border flex items-center justify-center">
+            <div className="flex h-full w-full bg-[#F4F7F8] rounded-[32px] shadow-sm overflow-hidden">
+              {children}
+            </div>
           </div>
           <Toaster />
         </ThemeProvider>
