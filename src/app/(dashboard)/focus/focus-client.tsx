@@ -167,7 +167,7 @@ export function FocusClient({ initialTodos }: { initialTodos: any[] }) {
               Ongoing
             </button>
             <button 
-              onClick={() => { pauseTimer(); setType('SHORT_BREAK') }}
+              onClick={() => { pauseTimer(); setType('BREAK') }}
               className={`w-1/2 text-center text-sm font-semibold rounded-full px-6 py-2 transition-all duration-300 flex items-center justify-center gap-2 ${type !== 'WORK' ? 'bg-white text-[#1A2433] shadow-sm' : 'text-slate-500 hover:text-[#1A2433]'}`}
             >
               <Coffee className="w-4 h-4" />
