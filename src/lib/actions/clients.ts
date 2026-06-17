@@ -58,3 +58,26 @@ export async function createClientAction(name: string, phone?: string, company?:
   
   return { success: true, client: data[0] }
 }
+
+export async function updateClientAction(id: string, data: { name: string; phone?: string; company?: string; email?: string }) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return { error: "Вы не авторизованы" }
+
+  if (!data.name.trim()) return { error: "Имя обязательно" }
+
+  const { error } = await supabase
+    .from("clients")
+    .update({
+      name: data.name,
+      phone: data.phone || null,
+      company: data.company || null,
+      email: data.email || null,
+    })
+    .eq("id", id)
+
+  if (error) return { error: error.message }
+  
+  revalidatePath("/crm")
+  return { success: true }
+}

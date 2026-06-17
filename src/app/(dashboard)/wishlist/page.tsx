@@ -1,8 +1,8 @@
-import { getWishlistItems, markWishlistPurchased, deleteWishlistItem } from "@/lib/actions/wishlist"
+import { getWishlistItems, markWishlistPurchased, deleteWishlistItem, undoWishlistPurchase } from "@/lib/actions/wishlist"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Plus, Monitor, BookOpen, Key, Package, ExternalLink, CheckCircle2, Trash2 } from "lucide-react"
+import { Plus, Monitor, BookOpen, Key, Package, ExternalLink, CheckCircle2, Trash2, Undo2 } from "lucide-react"
 import { AddWishlistDialog } from "@/components/wishlist/add-wishlist-dialog"
 import { revalidatePath } from "next/cache"
 
@@ -48,6 +48,12 @@ export default async function WishlistPage() {
     "use server"
     const id = formData.get("id") as string;
     if (id) await deleteWishlistItem(id);
+  }
+
+  const handleUndo = async (formData: FormData) => {
+    "use server"
+    const id = formData.get("id") as string;
+    if (id) await undoWishlistPurchase(id);
   }
 
   return (
@@ -160,12 +166,20 @@ export default async function WishlistPage() {
                         <p className="text-xs text-muted-foreground">{Number(item.price).toLocaleString()} {item.currency}</p>
                       </div>
                     </div>
-                    <form action={handleDelete}>
-                      <input type="hidden" name="id" value={item.id} />
-                      <Button size="icon" variant="ghost" className="h-6 w-6 text-muted-foreground hover:text-destructive">
-                        <Trash2 className="h-3 w-3" />
-                      </Button>
-                    </form>
+                    <div className="flex gap-1">
+                      <form action={handleUndo}>
+                        <input type="hidden" name="id" value={item.id} />
+                        <Button size="icon" variant="ghost" className="h-6 w-6 text-muted-foreground hover:text-primary">
+                          <Undo2 className="h-3 w-3" />
+                        </Button>
+                      </form>
+                      <form action={handleDelete}>
+                        <input type="hidden" name="id" value={item.id} />
+                        <Button size="icon" variant="ghost" className="h-6 w-6 text-muted-foreground hover:text-destructive">
+                          <Trash2 className="h-3 w-3" />
+                        </Button>
+                      </form>
+                    </div>
                   </div>
                 )
               })

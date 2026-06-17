@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button"
 import { Play, TrendingUp, Clock, Wallet, Users, ArrowRight, Briefcase, Flame } from "lucide-react"
 import { DashboardTimerCard } from "@/components/timer/dashboard-timer-card"
 import { getDashboardData } from "@/lib/actions/dashboard"
+import Link from "next/link"
+import { TodoItem } from "@/components/todos/todo-item"
 
 export default async function DashboardPage() {
   const data = await getDashboardData();
@@ -24,8 +26,10 @@ export default async function DashboardPage() {
           <h1 className="font-sans font-bold tracking-tight text-3xl font-bold tracking-tight">Добро пожаловать, Jkhan</h1>
           <p className="text-muted-foreground mt-1">Вот что происходит с вашими проектами сегодня.</p>
         </div>
-        <Button className="bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-full hover:scale-105 transition-transform shadow-glow">
-          <Play className="mr-2 h-4 w-4" /> Запустить Таймер
+        <Button asChild className="bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-full hover:scale-105 transition-transform shadow-glow">
+          <Link href="/timer">
+            <Play className="mr-2 h-4 w-4" /> Запустить Таймер
+          </Link>
         </Button>
       </div>
 
@@ -100,15 +104,7 @@ export default async function DashboardPage() {
             {data.pendingTasks && data.pendingTasks.length > 0 ? (
               <div className="space-y-4">
                 {data.pendingTasks.map((task: any) => (
-                  <div key={task.id} className="flex items-center justify-between p-3 rounded-lg bg-background/50 border border-border/50 hover:border-accent/50 transition-smooth cursor-pointer">
-                    <div className="flex items-center gap-3">
-                       <div className="h-2 w-2 rounded-full bg-accent"></div>
-                       <span className="font-medium">{task.title}</span>
-                    </div>
-                    <Badge variant="outline" className={task.status === 'IN_PROGRESS' ? 'border-accent text-accent' : ''}>
-                      {task.status === 'IN_PROGRESS' ? 'В работе' : 'Нужно сделать'}
-                    </Badge>
-                  </div>
+                  <TodoItem key={task.id} task={task} />
                 ))}
               </div>
             ) : (

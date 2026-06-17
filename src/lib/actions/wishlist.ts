@@ -75,6 +75,25 @@ export async function markWishlistPurchased(id: string) {
   return { success: true }
 }
 
+export async function undoWishlistPurchase(id: string) {
+  const supabase = await createClient()
+
+  const { error } = await supabase
+    .from("wishlist_items")
+    .update({ 
+      status: 'PLANNED',
+      purchased_at: null
+    })
+    .eq('id', id);
+
+  if (error) {
+    return { error: error.message }
+  }
+
+  revalidatePath("/wishlist");
+  return { success: true }
+}
+
 export async function deleteWishlistItem(id: string) {
   const supabase = await createClient()
 

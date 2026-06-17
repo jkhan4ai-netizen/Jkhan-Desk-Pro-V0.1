@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Plus, CheckCircle2, Circle, Clock, Briefcase } from "lucide-react"
 import { CreateTodoDialog } from "@/components/todos/create-todo-dialog"
+import { TodoItem } from "@/components/todos/todo-item"
 
 // A simple client component wrapper for the Create Task Dialog could be added later,
 // For now, we scaffold the UI.
@@ -15,27 +16,7 @@ export default async function TodosPage() {
   const inProgress = todos?.filter((t: any) => t.status === 'IN_PROGRESS') || [];
   const done = todos?.filter((t: any) => t.status === 'DONE') || [];
 
-  const renderTaskCard = (task: any) => (
-    <div key={task.id} className="p-3 mb-3 bg-background/50 border border-border/50 rounded-lg hover:border-accent/50 transition-smooth group cursor-pointer">
-      <div className="flex items-start justify-between">
-        <div className="flex items-start gap-2">
-          <button className="mt-0.5 text-muted-foreground hover:text-green-500 transition-smooth">
-            {task.status === 'DONE' ? <CheckCircle2 className="h-4 w-4 text-green-500" /> : <Circle className="h-4 w-4" />}
-          </button>
-          <div>
-            <p className={`text-sm font-medium ${task.status === 'DONE' ? 'line-through text-muted-foreground' : 'text-foreground'}`}>
-              {task.title}
-            </p>
-            {task.projects && (
-              <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
-                <Briefcase className="h-3 w-3" /> {task.projects.title}
-              </p>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  const done = todos?.filter((t: any) => t.status === 'DONE') || [];
 
   return (
     <div className="flex flex-col gap-6 h-full">
@@ -67,7 +48,7 @@ export default async function TodosPage() {
               {notStarted.length === 0 ? (
                  <p className="text-sm text-muted-foreground text-center py-8">Нет новых задач</p>
               ) : (
-                notStarted.map(renderTaskCard)
+                notStarted.map((task: any) => <TodoItem key={task.id} task={task} />)
               )}
             </div>
           </div>
@@ -84,7 +65,7 @@ export default async function TodosPage() {
               {inProgress.length === 0 ? (
                  <p className="text-sm text-muted-foreground text-center py-8">Пусто</p>
               ) : (
-                inProgress.map(renderTaskCard)
+                inProgress.map((task: any) => <TodoItem key={task.id} task={task} />)
               )}
             </div>
           </div>
@@ -101,7 +82,7 @@ export default async function TodosPage() {
               {done.length === 0 ? (
                  <p className="text-sm text-muted-foreground text-center py-8">Пока нет завершенных</p>
               ) : (
-                done.map(renderTaskCard)
+                done.map((task: any) => <TodoItem key={task.id} task={task} />)
               )}
             </div>
           </div>

@@ -24,7 +24,7 @@ export function DashboardTimerCard() {
         <span className="font-sans font-bold tracking-tight text-4xl text-foreground tabular-nums drop-shadow-md">
           {minutes}:{seconds.toString().padStart(2, '0')}
         </span>
-        <svg className="absolute top-0 left-0 w-full h-full transform -rotate-90">
+        <svg viewBox="0 0 128 128" className="absolute top-0 left-0 w-full h-full transform -rotate-90">
           <circle cx="64" cy="64" r="60" stroke="currentColor" strokeWidth="4" fill="transparent" className="text-accent opacity-20" />
           <circle 
             cx="64" cy="64" r="60" 
@@ -47,15 +47,6 @@ export function DashboardTimerCard() {
           {isRunning ? <Pause className="mr-2 h-4 w-4" /> : <Play className="mr-2 h-4 w-4" />}
           {isRunning ? 'Пауза' : 'Старт'}
         </Button>
-        <Button variant="outline" className="px-3 border-border/50" onClick={resetTimer}>
-          <TimerReset className="h-4 w-4 text-muted-foreground" />
-        </Button>
-        <Button asChild variant="outline" className="px-3 border-border/50">
-          <Link href="/timer" title="Открыть таймер на весь экран">
-             <Clock className="h-4 w-4 text-muted-foreground" />
-          </Link>
-        </Button>
-      </div>
     </div>
   )
 }

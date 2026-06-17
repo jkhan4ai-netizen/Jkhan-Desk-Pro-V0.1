@@ -4,6 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Plus, Users, Mail, Phone } from "lucide-react"
+import { EditClientDialog } from "@/components/crm/edit-client-dialog"
 
 export default async function CrmPage() {
   const { clients, error } = await getClients();
@@ -40,6 +41,7 @@ export default async function CrmPage() {
                   <TableHead>Компания</TableHead>
                   <TableHead>Контакты</TableHead>
                   <TableHead>Статус</TableHead>
+                  <TableHead className="w-[50px]"></TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -63,6 +65,9 @@ export default async function CrmPage() {
                       }>
                         {client.status}
                       </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <EditClientDialog client={client} />
                     </TableCell>
                   </TableRow>
                 ))}
