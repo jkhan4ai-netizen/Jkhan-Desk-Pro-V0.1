@@ -16,8 +16,6 @@ export default async function TodosPage() {
   const inProgress = todos?.filter((t: any) => t.status === 'IN_PROGRESS') || [];
   const done = todos?.filter((t: any) => t.status === 'DONE') || [];
 
-  const done = todos?.filter((t: any) => t.status === 'DONE') || [];
-
   return (
     <div className="flex flex-col gap-6 h-full">
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
