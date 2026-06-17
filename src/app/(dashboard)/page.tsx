@@ -29,7 +29,7 @@ export default async function DashboardPage() {
           <h1 className="font-sans font-bold tracking-tight text-3xl">{dict.dashboard.welcome}, Jkhan</h1>
           <p className="text-muted-foreground mt-1">{dict.dashboard.subtitle}</p>
         </div>
-        <Button asChild className="bg-gray-900 text-white rounded-full hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300">
+        <Button asChild className="bg-[var(--inverse-surface)] text-[var(--inverse-on-surface)] rounded-full hover:bg-[var(--on-surface)] transition-all duration-300 px-6">
           <Link href="/focus">
             <Play className="mr-2 h-4 w-4" /> {dict.dashboard.startTimer}
           </Link>
@@ -37,10 +37,12 @@ export default async function DashboardPage() {
       </div>
 
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="glass-panel border-border/50 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+        <Card className="bg-surface-container-lowest border-outline-variant rounded-xl shadow-sm animate-fade-in" style={{ animationDelay: "0.1s" }}>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Активные Проекты</CardTitle>
-            <Briefcase className="h-4 w-4 text-accent" />
+            <div className="text-primary bg-primary-container/20 p-2 rounded-lg">
+              <Briefcase className="h-4 w-4" />
+            </div>
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold font-sans font-bold tracking-tight">{data.activeProjects}</div>
@@ -50,10 +52,10 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card className="glass-panel glass-panel-hover transition-smooth border-border/50">
+        <Card className="bg-surface-container-lowest border-outline-variant rounded-xl shadow-sm transition-smooth">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Ожидаемый Доход</CardTitle>
-            <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary-foreground">
+            <div className="text-secondary bg-secondary-container p-2 rounded-lg">
               <Wallet className="h-4 w-4" />
             </div>
           </CardHeader>
@@ -65,10 +67,12 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card className="glass-panel border-border/50 animate-fade-in" style={{ animationDelay: "0.3s" }}>
+        <Card className="bg-surface-container-lowest border-outline-variant rounded-xl shadow-sm animate-fade-in" style={{ animationDelay: "0.3s" }}>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Фокус Сегодня</CardTitle>
-            <Flame className="h-4 w-4 text-red-500" />
+            <div className="text-error bg-error-container/50 p-2 rounded-lg">
+              <Flame className="h-4 w-4" />
+            </div>
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold font-sans font-bold tracking-tight">{hours}ч {minutes}м</div>
@@ -78,10 +82,10 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card className="glass-panel glass-panel-hover transition-smooth border-border/50">
+        <Card className="bg-surface-container-lowest border-outline-variant rounded-xl shadow-sm transition-smooth">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Новые Клиенты</CardTitle>
-            <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary-foreground">
+            <div className="text-tertiary bg-tertiary-container/20 p-2 rounded-lg">
               <Users className="h-4 w-4" />
             </div>
           </CardHeader>
@@ -96,7 +100,7 @@ export default async function DashboardPage() {
 
       <div className="grid gap-8 md:grid-cols-7 lg:grid-cols-7 mt-8">
         {/* Pending Tasks */}
-        <Card className="col-span-4 lg:col-span-4 border-gray-100/50">
+        <Card className="col-span-4 lg:col-span-4 bg-surface-container-lowest border-outline-variant rounded-xl shadow-sm">
           <CardHeader>
             <CardTitle>{dict.dashboard.pendingTasks}</CardTitle>
             <CardDescription>
@@ -119,7 +123,7 @@ export default async function DashboardPage() {
         </Card>
 
         {/* Quick Actions / Info */}
-        <Card className="col-span-3 lg:col-span-3 border-gray-100/50">
+        <Card className="col-span-3 lg:col-span-3 bg-surface-container-lowest border-outline-variant rounded-xl shadow-sm">
           <CardHeader>
             <CardTitle>{dict.dashboard.focusTime}</CardTitle>
             <CardDescription>

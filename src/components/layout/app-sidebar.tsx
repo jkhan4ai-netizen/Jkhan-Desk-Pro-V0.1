@@ -87,16 +87,16 @@ export function AppSidebar({ dict, ...props }: React.ComponentProps<typeof Sideb
   ]
 
   return (
-    <Sidebar collapsible="icon" {...props} className="w-64 flex flex-col bg-transparent border-r border-gray-200/50 py-6 px-4">
+    <Sidebar collapsible="icon" {...props} className="w-64 flex flex-col bg-surface-container-low border-r border-outline-variant py-6 px-4">
       <SidebarHeader className="flex flex-row items-center pb-4 px-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gray-900 text-white shadow-sm animate-fade-in">
-          <ShieldCheck className="h-5 w-5" />
+        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-container text-on-primary-container shadow-sm animate-fade-in">
+          <ShieldCheck className="h-6 w-6" />
         </div>
         <div className="ml-3 flex flex-col overflow-hidden transition-all group-data-[collapsible=icon]:hidden">
-          <span className="font-sans font-bold tracking-tight text-lg leading-tight text-foreground truncate">
+          <span className="font-sans font-bold tracking-tight text-lg leading-tight text-primary truncate">
             Jkhan Desk Pro
           </span>
-          <span className="text-[10px] uppercase font-semibold tracking-wider text-muted-foreground truncate">
+          <span className="text-[10px] uppercase font-semibold tracking-wider text-on-surface-variant truncate">
             Workspace
           </span>
         </div>

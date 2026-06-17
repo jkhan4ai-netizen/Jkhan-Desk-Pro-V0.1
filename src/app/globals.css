@@ -2,29 +2,45 @@
 
 @plugin "tailwindcss-animate";
 
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap');
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.97 0.01 260); /* #F3F5F9 - Soft grayish blue */
-  --foreground: oklch(0.145 0 0); /* 0F172A - slate-900 */
-  --card: oklch(1 0 0); /* Pure white */
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.5 0.15 250); /* #2563eb */
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.5 0.15 250); /* #2563eb */
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.97 0 0); /* Very subtle almost invisible border */
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.5 0.15 250);
-  --radius: 1.5rem; 
+  --background: #f9f9ff;
+  --foreground: #141b2c;
+  --card: #ffffff;
+  --card-foreground: #141b2c;
+  --popover: #ffffff;
+  --popover-foreground: #141b2c;
+  --primary: #00459a;
+  --primary-foreground: #ffffff;
+  --secondary: #525f73;
+  --secondary-foreground: #ffffff;
+  --muted: #f1f3ff;
+  --muted-foreground: #586579;
+  --accent: #d6e3fb;
+  --accent-foreground: #001a42;
+  --destructive: #ba1a1a;
+  --destructive-foreground: #ffffff;
+  --border: #c2c6d5;
+  --input: #e0e8ff;
+  --ring: #005cc8;
+  --radius: 0.75rem; 
+
+  /* Stitch Custom Surface Colors */
+  --surface: #f9f9ff;
+  --surface-dim: #d2daf0;
+  --surface-bright: #f9f9ff;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f1f3ff;
+  --surface-container: #e9edff;
+  --surface-container-high: #e0e8ff;
+  --surface-container-highest: #dbe2f9;
+  --on-surface: #141b2c;
+  --on-surface-variant: #424753;
+  --outline: #727785;
+  --outline-variant: #c2c6d5;
 
   /* Custom Glass UI Tokens */
   --color-glass: rgba(255, 255, 255, 0.6);
@@ -47,25 +63,39 @@
 }
 
 .dark {
-  --background: oklch(0.13 0.028 261); /* Deep navy */
-  --foreground: oklch(0.985 0 0); /* F8FAFC - slate-50 */
-  --card: oklch(0.18 0.02 261); /* Slightly lighter navy for cards */
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.18 0.02 261);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.6 0.15 250); /* #3b82f6 Neon Blue */
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.269 0 0); /* 1E293B - slate-800 */
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.6 0.15 250); /* #3b82f6 Neon Blue */
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.269 0 0);
-  --input: oklch(0.269 0 0);
-  --ring: oklch(0.6 0.15 250);
+  --background: #141b2c;
+  --foreground: #f9f9ff;
+  --card: #293041;
+  --card-foreground: #f9f9ff;
+  --popover: #293041;
+  --popover-foreground: #f9f9ff;
+  --primary: #aec6ff;
+  --primary-foreground: #001a42;
+  --secondary: #bac7de;
+  --secondary-foreground: #0f1c2d;
+  --muted: #293041;
+  --muted-foreground: #c2c6d5;
+  --accent: #3b485a;
+  --accent-foreground: #f9f9ff;
+  --destructive: #ffdad6;
+  --destructive-foreground: #93000a;
+  --border: #727785;
+  --input: #424753;
+  --ring: #aec6ff;
+
+  /* Stitch Custom Surface Colors - Dark */
+  --surface: #141b2c;
+  --surface-dim: #141b2c;
+  --surface-bright: #293041;
+  --surface-container-lowest: #0f1c2d;
+  --surface-container-low: #141b2c;
+  --surface-container: #293041;
+  --surface-container-high: #3b485a;
+  --surface-container-highest: #424753;
+  --on-surface: #f9f9ff;
+  --on-surface-variant: #c2c6d5;
+  --outline: #727785;
+  --outline-variant: #424753;
 
   /* Custom Glass UI Tokens - Dark */
   --color-glass: rgba(15, 23, 42, 0.6);
@@ -104,6 +134,21 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+
+  /* Stitch Surfaces */
+  --color-surface: var(--surface);
+  --color-surface-dim: var(--surface-dim);
+  --color-surface-bright: var(--surface-bright);
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -116,6 +161,14 @@
   --color-sidebar-primary: var(--sidebar-primary);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar: var(--sidebar);
+  --font-sans: 'Hanken Grotesk', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--background);
+  color: var(--foreground);
 }
 
 @layer base {
