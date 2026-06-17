@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { CheckCircle2, Circle, Briefcase, Loader2 } from "lucide-react"
+import { CheckCircle2, Circle, Clock, Briefcase, Loader2 } from "lucide-react"
 import { updateTodoStatus } from "@/lib/actions/todos"
 import { useRouter } from "next/navigation"
 
@@ -17,11 +17,14 @@ export function TodoItem({ task }: TodoItemProps) {
     if (isLoading) return;
     setIsLoading(true);
     
-    // Determine next status
-    // If DONE, move to NOT_STARTED. If NOT_STARTED or IN_PROGRESS, move to DONE.
-    // Or we could move NOT_STARTED -> IN_PROGRESS -> DONE -> NOT_STARTED.
-    // The easiest toggle for the checkmark is DONE <-> NOT_STARTED
-    const nextStatus = task.status === 'DONE' ? 'NOT_STARTED' : 'DONE';
+    let nextStatus = 'NOT_STARTED';
+    if (task.status === 'NOT_STARTED') {
+      nextStatus = 'IN_PROGRESS';
+    } else if (task.status === 'IN_PROGRESS') {
+      nextStatus = 'DONE';
+    } else {
+      nextStatus = 'NOT_STARTED';
+    }
     
     await updateTodoStatus(task.id, nextStatus);
     setIsLoading(false);
@@ -35,12 +38,14 @@ export function TodoItem({ task }: TodoItemProps) {
           <button 
             onClick={handleToggle}
             disabled={isLoading}
-            className="mt-0.5 text-muted-foreground hover:text-green-500 transition-smooth"
+            className="mt-0.5 text-muted-foreground hover:text-primary transition-smooth"
           >
             {isLoading ? (
               <Loader2 className="h-4 w-4 animate-spin text-accent" />
             ) : task.status === 'DONE' ? (
               <CheckCircle2 className="h-4 w-4 text-green-500" />
+            ) : task.status === 'IN_PROGRESS' ? (
+              <Clock className="h-4 w-4 text-accent animate-pulse" />
             ) : (
               <Circle className="h-4 w-4" />
             )}
