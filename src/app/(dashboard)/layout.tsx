@@ -14,8 +14,8 @@ export default function DashboardLayout({
   return (
     <SidebarProvider>
       <AppSidebar />
-      <SidebarInset className="bg-transparent flex flex-col flex-1 overflow-hidden">
-        <header className="flex justify-between items-center w-full h-10 px-8 mt-6">
+      <SidebarInset className="bg-white flex flex-col flex-1 overflow-hidden">
+        <header className="h-14 border-b border-transparent px-8 flex justify-between items-center shrink-0">
           <div className="flex items-center gap-2">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 h-4" />
@@ -25,7 +25,7 @@ export default function DashboardLayout({
             <ThemeToggle />
           </div>
         </header>
-        <main className="flex-1 flex flex-col px-8 py-6 overflow-y-auto gap-6 animate-fade-in">
+        <main className="flex-1 overflow-y-auto px-8 py-6 flex flex-col gap-6 animate-fade-in">
           {children}
         </main>
       </SidebarInset>
