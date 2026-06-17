@@ -40,7 +40,7 @@ export default async function ProjectsPage() {
         </TabsContent>
 
         <TabsContent value="list" className="m-0 focus-visible:outline-none focus-visible:ring-0">
-          <Card className="glass-panel border-border/50 animate-fade-in">
+          <Card className="bg-surface-container-lowest border-border animate-fade-in">
         <CardHeader>
           <CardTitle>Все Проекты</CardTitle>
           <CardDescription>Полный список ваших текущих и завершенных проектов.</CardDescription>

@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="ru" suppressHydrationWarning>
       <body
-        className={`${inter.variable} font-sans antialiased bg-[#EBF0F2] text-[#111827]`}
+        className={`${inter.variable} font-sans antialiased bg-background text-foreground`}
       >
         <ThemeProvider
           attribute="class"
@@ -31,8 +31,8 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <div className="h-screen w-full bg-[#EBF0F2] p-4 md:p-6 box-border flex items-center justify-center">
-            <div className="flex h-full w-full bg-[#F4F7F8] rounded-[32px] shadow-sm overflow-hidden">
+          <div className="h-screen w-full bg-background p-4 md:p-6 box-border flex items-center justify-center transition-colors">
+            <div className="flex h-full w-full bg-surface rounded-[32px] shadow-sm overflow-hidden border border-border/50">
               {children}
             </div>
           </div>

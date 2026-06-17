@@ -28,9 +28,9 @@ export function KanbanColumn({ id, title, projects }: KanbanColumnProps) {
   }
 
   return (
-    <div className="flex flex-col flex-1 min-w-[280px] max-w-[320px] bg-background/30 rounded-xl border border-border/40 overflow-hidden">
+    <div className="flex flex-col flex-1 min-w-[280px] max-w-[320px] bg-surface-container rounded-lg border border-border overflow-hidden">
       {/* Column Header */}
-      <div className="p-4 border-b border-border/40 flex items-center justify-between bg-background/50 backdrop-blur-sm sticky top-0 z-10">
+      <div className="p-4 border-b border-border flex items-center justify-between bg-surface-container-low sticky top-0 z-10">
         <div className="flex items-center gap-2">
           <h3 className="font-medium text-sm">{title}</h3>
           <Badge variant="secondary" className={`text-xs ${getColorClasses(id)}`}>
@@ -43,15 +43,15 @@ export function KanbanColumn({ id, title, projects }: KanbanColumnProps) {
       <div
         ref={setNodeRef}
         className={`flex-1 p-3 transition-colors min-h-[150px] overflow-y-auto custom-scrollbar ${
-          isOver ? "bg-primary/5" : ""
+          isOver ? "bg-[var(--primary)]/5" : ""
         }`}
       >
         {projects.map((p) => (
           <KanbanCard key={p.id} project={p} />
         ))}
         {projects.length === 0 && (
-          <div className="h-full flex items-center justify-center min-h-[100px] border-2 border-dashed border-border/40 rounded-lg">
-            <span className="text-xs text-muted-foreground/60 text-center px-4">
+          <div className="h-full flex items-center justify-center min-h-[100px] border-2 border-dashed border-border rounded-lg bg-surface-container-lowest/50">
+            <span className="text-xs text-[var(--on-surface-variant)] text-center px-4">
               Перетащите проекты сюда
             </span>
           </div>
