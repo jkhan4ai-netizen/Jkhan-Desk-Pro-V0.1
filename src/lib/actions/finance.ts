@@ -3,6 +3,16 @@
 import { createClient } from "@/lib/supabase/server"
 import { revalidatePath } from "next/cache"
 
+// Mock exchange rates — in production, use a real API
+const MOCK_USD_RATE = 12500;
+const MOCK_RUB_RATE = 140;
+
+function normalizeToUZS(amount: number, currency: string): number {
+  if (currency === 'USD') return amount * MOCK_USD_RATE;
+  if (currency === 'RUB') return amount * MOCK_RUB_RATE;
+  return amount;
+}
+
 export async function getFinanceStats() {
   const supabase = await createClient()
 
@@ -26,16 +36,6 @@ export async function getFinanceStats() {
   }
 
   // For simplicity, we assume UZS is the base currency.
-  // In a real app, we would convert USD/RUB to UZS using real-time rates.
-  // For the MVP, we will just sum them up if they are UZS, or apply a fixed mock rate.
-  const MOCK_USD_RATE = 12500;
-  const MOCK_RUB_RATE = 140;
-
-  const normalizeToUZS = (amount: number, currency: string) => {
-    if (currency === 'USD') return amount * MOCK_USD_RATE;
-    if (currency === 'RUB') return amount * MOCK_RUB_RATE;
-    return amount;
-  }
 
   let totalIncome = 0; // expected income from projects
   let totalReceived = 0; // actual received (for now we count prepayment as received)
@@ -147,14 +147,6 @@ export async function getFinanceChartData() {
     .gte("date", fromDateString);
 
   // Group by month
-  const MOCK_USD_RATE = 12500;
-  const MOCK_RUB_RATE = 140;
-
-  const normalizeToUZS = (amount: number, currency: string) => {
-    if (currency === 'USD') return amount * MOCK_USD_RATE;
-    if (currency === 'RUB') return amount * MOCK_RUB_RATE;
-    return amount;
-  }
 
   const chartDataMap = new Map<string, { income: number, expense: number }>();
 

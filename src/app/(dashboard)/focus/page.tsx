@@ -103,7 +103,7 @@ export default async function FocusPage() {
             <h2 className="text-xl font-bold tracking-tight">{dict.focus.tasks}</h2>
             <p className="text-sm text-muted-foreground">{dict.focus.tasksDesc}</p>
           </div>
-          <CreateTodoDialog projects={[]} />
+          <CreateTodoDialog />
         </div>
         
         <div className="flex-1 overflow-y-auto pr-2 pb-24">

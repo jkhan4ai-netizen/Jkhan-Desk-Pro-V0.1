@@ -15,7 +15,7 @@ export default async function ProjectsPage() {
     <div className="flex flex-col gap-6">
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
-          <h1 className="font-sans font-bold tracking-tight text-3xl font-bold tracking-tight">Управление Проектами</h1>
+          <h1 className="font-sans font-bold tracking-tight text-3xl">Управление Проектами</h1>
           <p className="text-muted-foreground mt-1">Отслеживайте статусы, финансы и дедлайны по всем вашим проектам.</p>
         </div>
         <div className="flex gap-2">

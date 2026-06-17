@@ -9,7 +9,7 @@ import Link from "next/link"
 
 export function FloatingTimer() {
   const pathname = usePathname()
-  const { timeLeft, isRunning, type, startTimer, pauseTimer, tick, resetTimer } = useTimerStore()
+  const { timeLeft, isRunning, type, workDuration, breakDuration, startTimer, pauseTimer, tick, resetTimer } = useTimerStore()
   const [mounted, setMounted] = useState(false)
 
   // Avoid hydration mismatch by rendering only on client
@@ -36,15 +36,14 @@ export function FloatingTimer() {
 
   // Don't show if the timer hasn't started and we are not in the middle of a session
   // Usually, we want the widget if it's running, or paused but partway through.
-  const isStarted = isRunning || timeLeft !== (type === 'WORK' ? 25 * 60 : 5 * 60)
+  const isStarted = isRunning || timeLeft !== (type === 'WORK' ? workDuration * 60 : breakDuration * 60)
   if (!isStarted) return null
 
   const minutes = Math.floor(timeLeft / 60)
   const seconds = timeLeft % 60
   
-  const progress = type === 'WORK' 
-    ? 100 - (timeLeft / (25 * 60)) * 100 
-    : 100 - (timeLeft / (5 * 60)) * 100
+  const totalSeconds = type === 'WORK' ? workDuration * 60 : breakDuration * 60
+  const progress = totalSeconds > 0 ? 100 - (timeLeft / totalSeconds) * 100 : 0
 
   return (
     <div className="fixed bottom-10 right-10 z-50 animate-in slide-in-from-bottom-5 fade-in duration-300">
@@ -65,7 +64,7 @@ export function FloatingTimer() {
               style={{ transition: 'stroke-dashoffset 1s linear' }}
             />
           </svg>
-          <span className="font-sans font-bold tracking-tight text-xs font-bold tabular-nums">
+          <span className="font-sans font-bold tracking-tight text-xs tabular-nums">
             {minutes}:{seconds.toString().padStart(2, '0')}
           </span>
         </Link>

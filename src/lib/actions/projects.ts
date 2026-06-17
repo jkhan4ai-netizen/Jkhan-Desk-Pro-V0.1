@@ -2,6 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
+import { notifyNewProject, notifyPaymentReceived } from "@/lib/telegram";
 
 // We will use 'any' for now since full types aren't generated yet
 // but we will structure the data correctly.
@@ -53,6 +54,7 @@ export async function createProject(formData: FormData) {
 
   // Handle Client Creation on the fly
   let finalClientId = clientId;
+  let clientName: string | undefined;
   if (clientId === "new_client") {
     const newClientName = formData.get("new_client_name") as string;
     if (newClientName) {
@@ -64,6 +66,7 @@ export async function createProject(formData: FormData) {
         
       if (!clientError && clientData) {
         finalClientId = clientData.id;
+        clientName = newClientName;
       } else {
         return { error: "Ошибка при создании нового клиента: " + (clientError?.message || "") };
       }
@@ -71,6 +74,11 @@ export async function createProject(formData: FormData) {
       finalClientId = null;
     }
   }
+
+  // Generate a more collision-resistant display_id using timestamp
+  const timestamp = Date.now().toString(36).toUpperCase();
+  const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+  const displayId = `PRJ-${timestamp.slice(-4)}${random}`;
 
   const { data, error } = await supabase
     .from("projects")
@@ -84,10 +92,13 @@ export async function createProject(formData: FormData) {
         currency,
         prepayment,
         description,
-        display_id: `PRJ-${Math.floor(Math.random() * 10000).toString().padStart(4, '0')}`,
+        display_id: displayId,
       }
     ])
-    .select();
+    .select(`
+      *,
+      clients ( name )
+    `);
 
   if (error) {
     console.error("Error creating project:", error);
@@ -97,12 +108,38 @@ export async function createProject(formData: FormData) {
   revalidatePath("/projects");
   revalidatePath("/");
   
-  return { success: true, project: data[0] };
+  // Send Telegram notification about new project
+  const project = data[0];
+  notifyNewProject({
+    title: project.title,
+    total_price: project.total_price,
+    currency: project.currency,
+    client_name: clientName || project.clients?.name,
+  }).catch(() => {}); // Fire-and-forget, don't block response
+
+  return { success: true, project };
 }
 
 export async function updateProjectStatus(id: string, status: string) {
   const supabase = await createClient();
   
+  // Auth check
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
+    return { error: "Вы не авторизованы" };
+  }
+
+  // If changing to PAID, fetch project info first for notification
+  let projectForNotification: any = null;
+  if (status === 'PAID') {
+    const { data: projectData } = await supabase
+      .from("projects")
+      .select(`*, clients ( name )`)
+      .eq("id", id)
+      .single();
+    projectForNotification = projectData;
+  }
+
   const { error } = await supabase
     .from("projects")
     .update({ status })
@@ -115,5 +152,15 @@ export async function updateProjectStatus(id: string, status: string) {
   revalidatePath("/projects");
   revalidatePath("/");
   
+  // Send Telegram notification when project is paid
+  if (status === 'PAID' && projectForNotification) {
+    notifyPaymentReceived({
+      title: projectForNotification.title,
+      total_price: projectForNotification.total_price,
+      currency: projectForNotification.currency,
+      client_name: projectForNotification.clients?.name,
+    }).catch(() => {}); // Fire-and-forget
+  }
+
   return { success: true };
 }

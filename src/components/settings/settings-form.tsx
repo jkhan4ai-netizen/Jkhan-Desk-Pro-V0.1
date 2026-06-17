@@ -176,7 +176,7 @@ export function SettingsForm({ initialData }: { initialData: any }) {
         <Card className="glass-panel border-border/50">
           <CardHeader>
             <CardTitle className="flex items-center gap-2"><MessageSquare className="h-5 w-5 text-[#0088cc]" /> Уведомления в Telegram</CardTitle>
-            <CardDescription>Привяжите свой Telegram для получения уведомлений о дедлайнах.</CardDescription>
+            <CardDescription>Привяжите свой Telegram для получения уведомлений о новых заказах, оплатах и дедлайнах.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <FormField

@@ -44,6 +44,7 @@ export async function updateSettings(data: {
   home_currency: string;
   pomodoro_work_minutes: number;
   pomodoro_short_break: number;
+  pomodoro_long_break?: number;
   telegram_chat_id?: string | null;
 }) {
   const supabase = await createClient()
@@ -54,6 +55,9 @@ export async function updateSettings(data: {
   }
 
   // Upsert settings
+  // Normalize: empty string → null so Supabase stores NULL instead of ""
+  const chatId = data.telegram_chat_id?.trim() || null;
+
   const { error } = await supabase
     .from("settings")
     .upsert({
@@ -62,7 +66,8 @@ export async function updateSettings(data: {
       home_currency: data.home_currency,
       pomodoro_work_minutes: data.pomodoro_work_minutes,
       pomodoro_short_break: data.pomodoro_short_break,
-      telegram_chat_id: data.telegram_chat_id !== undefined ? data.telegram_chat_id : undefined,
+      pomodoro_long_break: data.pomodoro_long_break ?? 15,
+      telegram_chat_id: chatId,
       updated_at: new Date().toISOString()
     }, { onConflict: 'user_id' });
 

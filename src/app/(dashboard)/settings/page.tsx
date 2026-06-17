@@ -7,7 +7,7 @@ export default async function SettingsPage() {
   return (
     <div className="flex flex-col gap-6 max-w-4xl mx-auto w-full pb-10">
       <div className="mb-2">
-        <h1 className="font-sans font-bold tracking-tight text-3xl font-bold tracking-tight">Настройки системы</h1>
+        <h1 className="font-sans font-bold tracking-tight text-3xl">Настройки системы</h1>
         <p className="text-muted-foreground mt-1">Управляйте внешним видом, локализацией и параметрами трекинга.</p>
       </div>
 

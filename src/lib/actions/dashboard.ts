@@ -41,10 +41,19 @@ export async function getDashboardData() {
     .order("created_at", { ascending: false })
     .limit(5);
 
+  // 4. Get new clients count
+  const { data: newClientsData } = await supabase
+    .from("clients")
+    .select("id")
+    .eq("status", "NEW");
+
+  const newClientsCount = newClientsData?.length || 0;
+
   return {
     activeProjects,
     totalRevenue,
     todayFocusMinutes,
     pendingTasks: todos || [],
+    newClientsCount,
   }
 }

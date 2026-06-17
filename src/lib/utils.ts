@@ -8,6 +8,30 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+const CURRENCY_FORMATTERS: Record<string, Intl.NumberFormat> = {
+  UZS: new Intl.NumberFormat("uz-UZ", {
+    style: "decimal",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }),
+  RUB: new Intl.NumberFormat("ru-RU", {
+    style: "decimal",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }),
+  USD: new Intl.NumberFormat("en-US", {
+    style: "decimal",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }),
+};
+
+const CURRENCY_SUFFIX: Record<string, string> = {
+  UZS: "сўм",
+  RUB: "₽",
+  USD: "$",
+};
+
 /**
  * Format currency amount with proper locale and symbol
  */
@@ -15,37 +39,13 @@ export function formatCurrency(
   amount: number,
   currency: "UZS" | "RUB" | "USD" = "UZS"
 ): string {
-  const formatters: Record<string, Intl.NumberFormat> = {
-    UZS: new Intl.NumberFormat("uz-UZ", {
-      style: "decimal",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }),
-    RUB: new Intl.NumberFormat("ru-RU", {
-      style: "decimal",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }),
-    USD: new Intl.NumberFormat("en-US", {
-      style: "decimal",
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }),
-  };
-
-  const symbols: Record<string, string> = {
-    UZS: "сўм",
-    RUB: "₽",
-    USD: "$",
-  };
-
-  const formatted = formatters[currency].format(amount);
+  const formatted = CURRENCY_FORMATTERS[currency].format(amount);
 
   if (currency === "USD") {
     return `$${formatted}`;
   }
 
-  return `${formatted} ${symbols[currency]}`;
+  return `${formatted} ${CURRENCY_SUFFIX[currency]}`;
 }
 
 /**
