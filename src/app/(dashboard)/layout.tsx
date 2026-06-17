@@ -4,6 +4,7 @@ import { AppSidebar } from "@/components/layout/app-sidebar"
 import { Separator } from "@/components/ui/separator"
 import { FloatingTimer } from "@/components/layout/floating-timer"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export default function DashboardLayout({
   children,
@@ -28,6 +29,9 @@ export default function DashboardLayout({
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
+          <div className="ml-auto">
+            <ThemeToggle />
+          </div>
         </header>
         <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8 animate-fade-in">
           {children}

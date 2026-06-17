@@ -5,9 +5,9 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.985 0 0); /* F8FAFC - slate-50 */
+  --background: oklch(0.97 0.01 260); /* Soft light grayish blue */
   --foreground: oklch(0.145 0 0); /* 0F172A - slate-900 */
-  --card: oklch(1 0 0);
+  --card: oklch(1 0 0); /* Pure white */
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
@@ -24,12 +24,12 @@
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.5 0.15 250);
-  --radius: 1rem;
+  --radius: 1.5rem; /* Big round corners for light theme */
 
   /* Custom Glass UI Tokens */
-  --color-glass: rgba(255, 255, 255, 0.75);
-  --color-glass-hover: rgba(255, 255, 255, 0.9);
-  --color-glass-border: rgba(37, 99, 235, 0.1);
+  --color-glass: rgba(255, 255, 255, 0.85);
+  --color-glass-hover: rgba(255, 255, 255, 1);
+  --color-glass-border: rgba(255, 255, 255, 1);
 
   /* Sidebar */
   --sidebar-width: 16rem;
@@ -148,7 +148,7 @@
   .glass-panel-hover:hover {
     background: var(--color-glass-hover);
     transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(37, 99, 235, 0.1);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
   }
 
   .dark .glass-panel-hover:hover {
