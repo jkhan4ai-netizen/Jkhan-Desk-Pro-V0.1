@@ -2,16 +2,9 @@
 
 import { createClient } from "@/lib/supabase/server"
 import { revalidatePath } from "next/cache"
+import { normalizeToUZS } from "@/lib/utils"
 
-// Mock exchange rates — in production, use a real API
-const MOCK_USD_RATE = 12500;
-const MOCK_RUB_RATE = 140;
 
-export function normalizeToUZS(amount: number, currency: string): number {
-  if (currency === 'USD') return amount * MOCK_USD_RATE;
-  if (currency === 'RUB') return amount * MOCK_RUB_RATE;
-  return amount;
-}
 
 export async function getFinanceStats() {
   const supabase = await createClient()

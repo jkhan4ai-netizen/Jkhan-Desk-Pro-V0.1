@@ -1,7 +1,7 @@
 "use server"
 
 import { createClient } from "@/lib/supabase/server"
-import { normalizeToUZS } from "./finance"
+import { normalizeToUZS } from "@/lib/utils"
 
 export async function getDashboardData() {
   const supabase = await createClient()

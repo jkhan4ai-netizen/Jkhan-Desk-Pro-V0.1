@@ -82,3 +82,13 @@ export function formatDuration(minutes: number): string {
 export function generateDisplayId(prefix: string, number: number): string {
   return `${prefix}-${String(number).padStart(4, "0")}`;
 }
+
+// Mock exchange rates — in production, use a real API
+const MOCK_USD_RATE = 12500;
+const MOCK_RUB_RATE = 140;
+
+export function normalizeToUZS(amount: number, currency: string): number {
+  if (currency === 'USD') return amount * MOCK_USD_RATE;
+  if (currency === 'RUB') return amount * MOCK_RUB_RATE;
+  return amount;
+}
