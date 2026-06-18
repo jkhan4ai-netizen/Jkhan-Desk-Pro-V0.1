@@ -7,7 +7,7 @@ import { revalidatePath } from "next/cache"
 const MOCK_USD_RATE = 12500;
 const MOCK_RUB_RATE = 140;
 
-function normalizeToUZS(amount: number, currency: string): number {
+export function normalizeToUZS(amount: number, currency: string): number {
   if (currency === 'USD') return amount * MOCK_USD_RATE;
   if (currency === 'RUB') return amount * MOCK_RUB_RATE;
   return amount;

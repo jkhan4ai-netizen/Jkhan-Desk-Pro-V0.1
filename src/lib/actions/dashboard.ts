@@ -1,6 +1,7 @@
 "use server"
 
 import { createClient } from "@/lib/supabase/server"
+import { normalizeToUZS } from "./finance"
 
 export async function getDashboardData() {
   const supabase = await createClient()
@@ -13,12 +14,12 @@ export async function getDashboardData() {
   // 1. Get active projects count
   const { data: projects } = await supabase
     .from("projects")
-    .select("status, total_price, prepayment");
+    .select("status, total_price, prepayment, currency");
     
   const activeProjects = projects?.filter((p: any) => p.status !== 'READY' && p.status !== 'PAID' && p.status !== 'ARCHIVED' && p.status !== 'CANCELLED').length || 0;
   
-  // Calculate revenue (for simplicity, ignoring currency conversion for MVP dashboard, just summing up)
-  const totalRevenue = projects?.reduce((sum: number, p: any) => sum + Number(p.total_price || 0), 0) || 0;
+  // Calculate revenue with currency conversion
+  const totalRevenue = projects?.reduce((sum: number, p: any) => sum + normalizeToUZS(Number(p.total_price || 0), p.currency || 'UZS'), 0) || 0;
 
   // 2. Get today's Pomodoro sessions
   const today = new Date();
