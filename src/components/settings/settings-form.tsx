@@ -29,6 +29,8 @@ const formSchema = z.object({
   pomodoro_work_minutes: z.coerce.number().min(1).max(120),
   pomodoro_short_break: z.coerce.number().min(1).max(60),
   telegram_chat_id: z.string().nullable().optional(),
+  custom_usd_rate: z.coerce.number().nullable().optional(),
+  custom_rub_rate: z.coerce.number().nullable().optional(),
 })
 
 export function SettingsForm({ initialData }: { initialData: any }) {
@@ -43,6 +45,8 @@ export function SettingsForm({ initialData }: { initialData: any }) {
       pomodoro_work_minutes: initialData?.pomodoro_work_minutes || 25,
       pomodoro_short_break: initialData?.pomodoro_short_break || 5,
       telegram_chat_id: initialData?.telegram_chat_id || null,
+      custom_usd_rate: initialData?.custom_usd_rate || null,
+      custom_rub_rate: initialData?.custom_rub_rate || null,
     },
   })
 
@@ -126,6 +130,45 @@ export function SettingsForm({ initialData }: { initialData: any }) {
                   <FormDescription>
                     В этой валюте будет считаться общая прибыль на главной.
                   </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </CardContent>
+        </Card>
+
+        {/* Курсы валют */}
+        <Card className="glass-panel border-border/50">
+          <CardHeader>
+            <CardTitle>Курсы валют</CardTitle>
+            <CardDescription>Оставьте пустым для авто-обновления с сайта ЦБ РУз.</CardDescription>
+          </CardHeader>
+          <CardContent className="grid sm:grid-cols-2 gap-6">
+            <FormField
+              control={form.control}
+              name="custom_usd_rate"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Курс USD к UZS (свой)</FormLabel>
+                  <FormControl>
+                    <Input type="number" step="0.01" className="bg-background/50" placeholder="Например: 12600" {...field} value={field.value || ''} />
+                  </FormControl>
+                  <FormDescription>Оставьте пустым для авто-расчета</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <FormField
+              control={form.control}
+              name="custom_rub_rate"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Курс RUB к UZS (свой)</FormLabel>
+                  <FormControl>
+                    <Input type="number" step="0.01" className="bg-background/50" placeholder="Например: 140.5" {...field} value={field.value || ''} />
+                  </FormControl>
+                  <FormDescription>Оставьте пустым для авто-расчета</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

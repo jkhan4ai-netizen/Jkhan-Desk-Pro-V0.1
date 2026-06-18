@@ -18,7 +18,7 @@ export default async function DashboardPage() {
     return <div className="p-4 text-destructive">Ошибка загрузки: {data.error}</div>;
   }
 
-  const formatUZS = (val: number) => new Intl.NumberFormat('ru-RU').format(val || 0);
+  const formatMoney = (val: number) => new Intl.NumberFormat('ru-RU').format(val || 0);
   const hours = Math.floor((data.todayFocusMinutes || 0) / 60);
   const minutes = (data.todayFocusMinutes || 0) % 60;
 
@@ -60,7 +60,7 @@ export default async function DashboardPage() {
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-sans font-bold tracking-tight">{formatUZS(data.totalRevenue)} <span className="text-sm text-muted-foreground font-sans">UZS</span></div>
+            <div className="text-2xl font-sans font-bold tracking-tight">{formatMoney(data.totalRevenue)} <span className="text-sm text-muted-foreground font-sans">{data.homeCurrency}</span></div>
             <p className="text-xs text-muted-foreground mt-1">
               В этом месяце
             </p>

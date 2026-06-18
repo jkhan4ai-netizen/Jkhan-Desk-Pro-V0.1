@@ -1,7 +1,7 @@
 "use server"
 
 import { createClient } from "@/lib/supabase/server"
-import { normalizeToUZS } from "@/lib/utils"
+import { fetchExchangeRates, convertCurrency } from "@/lib/currency"
 
 export async function getDashboardData() {
   const supabase = await createClient()
@@ -11,6 +11,16 @@ export async function getDashboardData() {
     return { error: "Вы не авторизованы" }
   }
 
+  // Get settings and exchange rates
+  const { data: settings } = await supabase
+    .from("settings")
+    .select("home_currency, custom_usd_rate, custom_rub_rate")
+    .eq("user_id", user.id)
+    .single();
+
+  const homeCurrency = settings?.home_currency || 'UZS';
+  const rates = await fetchExchangeRates(settings?.custom_usd_rate, settings?.custom_rub_rate);
+
   // 1. Get active projects count
   const { data: projects } = await supabase
     .from("projects")
@@ -18,8 +28,8 @@ export async function getDashboardData() {
     
   const activeProjects = projects?.filter((p: any) => p.status !== 'READY' && p.status !== 'PAID' && p.status !== 'ARCHIVED' && p.status !== 'CANCELLED').length || 0;
   
-  // Calculate revenue with currency conversion
-  const totalRevenue = projects?.reduce((sum: number, p: any) => sum + normalizeToUZS(Number(p.total_price || 0), p.currency || 'UZS'), 0) || 0;
+  // Calculate revenue with currency conversion to base currency
+  const totalRevenue = projects?.reduce((sum: number, p: any) => sum + convertCurrency(Number(p.total_price || 0), p.currency || 'UZS', homeCurrency, rates), 0) || 0;
 
   // 2. Get today's Pomodoro sessions
   const today = new Date();
@@ -56,5 +66,6 @@ export async function getDashboardData() {
     todayFocusMinutes,
     pendingTasks: todos || [],
     newClientsCount,
+    homeCurrency,
   }
 }

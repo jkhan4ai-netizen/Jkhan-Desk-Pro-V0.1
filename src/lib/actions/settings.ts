@@ -31,7 +31,9 @@ export async function getSettings() {
         pomodoro_work_minutes: 25,
         pomodoro_short_break: 5,
         pomodoro_long_break: 15,
-        telegram_chat_id: null
+        telegram_chat_id: null,
+        custom_usd_rate: null,
+        custom_rub_rate: null
       } 
     }
   }
@@ -46,6 +48,8 @@ export async function updateSettings(data: {
   pomodoro_short_break: number;
   pomodoro_long_break?: number;
   telegram_chat_id?: string | null;
+  custom_usd_rate?: number | null;
+  custom_rub_rate?: number | null;
 }) {
   const supabase = await createClient()
 
@@ -68,6 +72,8 @@ export async function updateSettings(data: {
       pomodoro_short_break: data.pomodoro_short_break,
       pomodoro_long_break: data.pomodoro_long_break ?? 15,
       telegram_chat_id: chatId,
+      custom_usd_rate: data.custom_usd_rate || null,
+      custom_rub_rate: data.custom_rub_rate || null,
       updated_at: new Date().toISOString()
     }, { onConflict: 'user_id' });
 

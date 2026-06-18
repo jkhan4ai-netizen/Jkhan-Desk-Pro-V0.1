@@ -2,7 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server"
 import { revalidatePath } from "next/cache"
-import { normalizeToUZS } from "@/lib/utils"
+import { fetchExchangeRates, convertCurrency } from "@/lib/currency"
 
 
 
@@ -28,25 +28,33 @@ export async function getFinanceStats() {
     return { error: "Ошибка при загрузке финансовой статистики" };
   }
 
-  // For simplicity, we assume UZS is the base currency.
+  // Get settings and exchange rates
+  const { data: settings } = await supabase
+    .from("settings")
+    .select("home_currency, custom_usd_rate, custom_rub_rate")
+    .eq("user_id", user.id)
+    .single();
+
+  const homeCurrency = settings?.home_currency || 'UZS';
+  const rates = await fetchExchangeRates(settings?.custom_usd_rate, settings?.custom_rub_rate);
 
   let totalIncome = 0; // expected income from projects
   let totalReceived = 0; // actual received (for now we count prepayment as received)
   
   projects?.forEach((p: any) => {
-    const totalUZS = normalizeToUZS(Number(p.total_price), p.currency);
-    const prepayUZS = normalizeToUZS(Number(p.prepayment), p.currency);
-    totalIncome += totalUZS;
-    totalReceived += prepayUZS;
+    const totalHome = convertCurrency(Number(p.total_price), p.currency || 'UZS', homeCurrency, rates);
+    const prepayHome = convertCurrency(Number(p.prepayment), p.currency || 'UZS', homeCurrency, rates);
+    totalIncome += totalHome;
+    totalReceived += prepayHome;
     if (p.status === 'PAID') {
       // if paid, they received the rest
-      totalReceived += (totalUZS - prepayUZS);
+      totalReceived += (totalHome - prepayHome);
     }
   });
 
   let totalExpenses = 0;
   expenses?.forEach((e: any) => {
-    totalExpenses += normalizeToUZS(Number(e.amount), e.currency);
+    totalExpenses += convertCurrency(Number(e.amount), e.currency || 'UZS', homeCurrency, rates);
   });
 
   return {
@@ -56,7 +64,8 @@ export async function getFinanceStats() {
       totalExpenses,
       netProfit: totalReceived - totalExpenses,
       expectedDebts: totalIncome - totalReceived
-    }
+    },
+    homeCurrency
   }
 }
 
@@ -124,6 +133,16 @@ export async function getFinanceChartData() {
     return { error: "Вы не авторизованы" }
   }
 
+  // Get settings and exchange rates
+  const { data: settings } = await supabase
+    .from("settings")
+    .select("home_currency, custom_usd_rate, custom_rub_rate")
+    .eq("user_id", user.id)
+    .single();
+
+  const homeCurrency = settings?.home_currency || 'UZS';
+  const rates = await fetchExchangeRates(settings?.custom_usd_rate, settings?.custom_rub_rate);
+
   // Fetch last 6 months of projects (for income) and expenses
   const sixMonthsAgo = new Date();
   sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
@@ -160,7 +179,7 @@ export async function getFinanceChartData() {
     
     if (chartDataMap.has(monthKey)) {
       const current = chartDataMap.get(monthKey)!;
-      current.income += normalizeToUZS(Number(p.total_price), p.currency);
+      current.income += convertCurrency(Number(p.total_price), p.currency || 'UZS', homeCurrency, rates);
       chartDataMap.set(monthKey, current);
     }
   });
@@ -171,7 +190,7 @@ export async function getFinanceChartData() {
     
     if (chartDataMap.has(monthKey)) {
       const current = chartDataMap.get(monthKey)!;
-      current.expense += normalizeToUZS(Number(e.amount), e.currency);
+      current.expense += convertCurrency(Number(e.amount), e.currency || 'UZS', homeCurrency, rates);
       chartDataMap.set(monthKey, current);
     }
   });
@@ -182,6 +201,6 @@ export async function getFinanceChartData() {
     expense: data.expense
   }));
 
-  return { data: formattedData };
+  return { data: formattedData, homeCurrency };
 }
 
